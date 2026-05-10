@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>采盟-人才評測系統 | 資訊分析專員/主管 測驗</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=PingFang+TC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #6a1b9a; 
+      --accent-color: #00bcd4;
+      --danger-color: #ef5350;
+      --text-main: #2d3748;
+      --text-sub: #718096;
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.5);
+      --border-radius-main: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      background: linear-gradient(135deg, #f5fbfb 0%, #ffffff 100%);
+      font-family: 'PingFang TC', sans-serif;
+      margin: 0;
+      display: flex;
+      color: var(--text-main);
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* 側邊導覽 */
+    .sidebar {
+      width: 280px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(25px);
+      padding: 35px 20px;
+      border-right: 1px solid var(--glass-border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .brand-area h2 { font-family: 'Orbitron'; font-size: 1.3rem; margin: 0; color: var(--primary-color); letter-spacing: 1px; }
+    
+    .nav-list { margin-top: 30px; list-style: none; padding: 0; }
+    .nav-item {
+      padding: 12px 15px; border-radius: 10px; font-size: 14px;
+      margin-bottom: 8px; background: white; border: 1px solid var(--glass-border);
+      color: var(--primary-color); font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    /* 主內容 */
+    .main-content {
+      flex-grow: 1;
+      padding: 30px 40px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .section-header {
+      font-size: 1.2rem; color: var(--primary-color); font-weight: 800;
+      border-left: 5px solid var(--accent-color); padding-left: 15px; margin-bottom: 5px;
+    }
+
+    .card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      border-radius: var(--border-radius-main);
+      padding: 30px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.02);
+      margin-bottom: 20px;
+    }
+
+    .q-block { margin-bottom: 30px; }
+    .q-title { font-weight: 800; color: #1a202c; margin-bottom: 10px; display: block; font-size: 16px; }
+    .scenario { background: rgba(0, 188, 212, 0.05); padding: 15px; border-radius: 10px; font-size: 14.5px; margin: 10px 0; line-height: 1.6; border-left: 3px solid var(--accent-color); }
+    
+    .formula-box {
+      background: #f8fafc; border: 1px dashed var(--text-sub); padding: 15px; border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--primary-color);
+      margin: 10px 0;
+    }
+
+    .error-view-table {
+      width: 100%; border-collapse: collapse; margin-top: 15px;
+    }
+    .error-view-table th, .error-view-table td {
+      border: 1px solid #e2e8f0; padding: 12px; text-align: center; font-size: 14px;
+    }
+    .error-view-table th { background: #f7fafc; color: var(--text-sub); font-size: 12px; }
+
+    ul, ol { padding-left: 20px; margin: 0; }
+    li { font-size: 15px; margin-bottom: 8px; line-height: 1.7; color: #2d3748; }
+
+    .btn-submit {
+      background: var(--primary-color); color: white; border: none;
+      padding: 18px 40px; border-radius: 50px; cursor: pointer;
+      font-weight: bold; font-family: 'Orbitron'; transition: 0.3s;
+      float: right; margin-top: 20px;
+      box-shadow: 0 4px 15px rgba(106, 27, 154, 0.2);
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(106, 27, 154, 0.4); }
+
+    @media (max-width: 992px) {
+      body { flex-direction: column; height: auto; overflow: visible; }
+      .sidebar { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="brand-area">
+      <h2>資訊分析專員/主管</h2>
+    </div>
+    <div class="nav-list">
+      <div class="nav-item">一、基礎概念</div>
+      <div class="nav-item">二、核心診斷工具</div>
+      <div class="nav-item">三、實務考核題目</div>
+    </div>
+    <div style="margin-top: auto; text-align: center; padding: 20px; background: rgba(239, 83, 80, 0.05); border-radius: 15px;">
+      <div style="font-size: 12px; color: var(--danger-color); font-weight: bold;">最晚繳卷時間</div>
+      <div style="font-family: Orbitron; font-size: 28px; font-weight: 900; color: var(--danger-color);">17:00</div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    
+    <div class="section-header">采盟庫存管理與系統診斷測驗</div>
+
+    <div class="card">
+      <div class="q-block">
+        <span class="q-title">一、 基礎概念：庫存是什麼？</span>
+        <p style="font-size: 14.5px;">在庫存管理系統中，庫存是數據隨時間流轉的平衡狀態，必須符合「時間連續性」與「帳實一致性」。</p>
+        
+        <div style="margin-top: 15px;">
+          <strong style="color: var(--primary-color);">1. 庫存的時間軸：期初、期末與結轉</strong>
+          <ul style="margin-top: 10px;">
+            <li><strong>期初庫存 (Opening Inventory)：</strong>指週期（日或月）開始時的數量。<br>
+                <small>○ 核心原則：本月的期初量 = 上個月月結後的期末量。</small></li>
+            <li><strong>期末庫存 (Closing Inventory)：</strong>指週期結束後，經過所有增減後的最終數量。</li>
+          </ul>
+          <div class="formula-box">
+            計算公式：期初 + 本期採購 - 本期銷貨 ± 本期調撥 ± 本期調整 = 期末庫存
+          </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+          <strong style="color: var(--primary-color);">2. 庫存狀態：未結庫存量 (Uncommitted)</strong>
+          <p style="font-size: 14px; color: var(--text-sub);">為了應對單據簽核與實際結帳的時間差，系統設計了緩衝區：</p>
+          <ul>
+            <li><strong>簽核時：</strong>單據數量寫入 <code style="color: #c0392b;">IM_TRANSATION</code> (交易記錄檔) 並更新 <code style="color: #c0392b;">IM_ON_HAND</code> 的未結量，主庫存數字不變。</li>
+            <li><strong>日結時：</strong>執行 <code style="color: #c0392b;">performBalance</code> 程序，將未結量正式結轉至 主庫存 (Stock)，並將未結量歸零。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="q-block">
+        <span class="q-title">二、 核心診斷工具：ErrorView 排程比對</span>
+        <p style="font-size: 14.5px;">IT 部門透過 Oracle Script 建立 <code style="color: #c0392b;">IM_ON_HAND_ERR_T2_VIEW3</code>，每日自動比對數據異常。</p>
+        
+        <div style="margin-top: 15px;">
+          <strong style="color: var(--primary-color);">比對邏輯：</strong>
+          <p style="font-size: 14px; color: var(--text-sub);">視圖會自動抓取以下兩端數據進行 Check：</p>
+          <ul>
+            <li><strong>表單端 (應有數量)：</strong>統計所有「已簽核但尚未結案」的單據總量（例如調撥單明細）。</li>
+            <li><strong>即庫端 (目前數量)：</strong>抓取 <code style="color: #c0392b;">IM_ON_HAND</code> 中目前標記的未結數量。</li>
+            <li><strong>異常判定：</strong>若 <span style="color: var(--danger-color); font-weight: bold;">應有數量 <> 目前數量</span>，代表庫存異動程序發生斷層。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header">三、 實務考核題目 (應徵者作答區)</div>
+    <div class="card">
+      <div class="scenario">
+        <strong>【案例情境】</strong> 今日 ErrorView 報警，品號 <strong>4711288021842</strong> 在庫別 <strong>23090</strong> 出現異常：
+        <table class="error-view-table">
+          <thead>
+            <tr>
+              <th>TYPE</th>
+              <th>應有數量 (單據端)</th>
+              <th>目前數量 (即庫端)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>MOVE (調撥模組)</td>
+              <td style="color: var(--primary-color); font-weight: bold;">0</td>
+              <td style="color: var(--danger-color); font-weight: bold;">4</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="q-block">
+        <p><strong style="color: var(--danger-color);">❓ 題目一：數據解讀</strong><br>
+        觀察上述數值，這代表系統目前發生了什麼問題？對月底報表有何影響？</p>
+      </div>
+
+      <div class="q-block">
+        <p><strong style="color: var(--danger-color);">❓ 題目二：標準除錯 SOP (核心考點)</strong><br>
+        身為 SA 資訊人員，當 ErrorView 報警時，請排定你的處理步驟。你會查閱哪些報表或 Table？</p>
+      </div>
+
+      <div class="q-block">
+        <p><strong style="color: var(--danger-color);">❓ 題目三：Double 扣帳異常診斷</strong><br>
+        去年曾發生過「海關上傳量變成 Double (雙倍)」的嚴重異常。經查 <code style="color: #c0392b;">IM_TRANSATION</code> 紀錄正常。請結合題目一的數據特徵，說明「人為介入修正」如何導致 Double 扣帳？</p>
+      </div>
+
+   
+    </div>
+
+  </main>
+
+</body>
+</html>

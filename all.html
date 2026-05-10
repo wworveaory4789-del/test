@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>采盟-人才評測系統 | 綜合測驗</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=PingFang+TC:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+/* 針對邏輯測驗圖片的優化 */
+.logic-img {
+    max-width: 150px;     /* 限制最大寬度，您可以依需求調整數值 */
+    width: 100%;          /* 在小螢幕時自動縮放 */
+    height: auto;
+    margin-top: 15px;
+    border-radius: 12px;  /* 圓角化 */
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* 輕微陰影 */
+}
+
+    :root {
+      --primary-color: #6a1b9a; 
+      --accent-color: #00bcd4;
+      --danger-color: #ef5350;
+      --text-main: #2d3748;
+      --text-sub: #718096;
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.5);
+      --border-radius-main: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      background: linear-gradient(135deg, #f5fbfb 0%, #ffffff 100%);
+      font-family: 'PingFang TC', sans-serif;
+      margin: 0;
+      display: flex;
+      color: var(--text-main);
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* 側邊導覽 */
+    .sidebar {
+      width: 280px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(25px);
+      padding: 35px 20px;
+      border-right: 1px solid var(--glass-border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .brand-area h2 { font-family: 'Orbitron'; font-size: 1.3rem; margin: 0; color: var(--primary-color); letter-spacing: 1px; }
+    
+    .nav-list { margin-top: 30px; list-style: none; padding: 0; }
+    .nav-item {
+      padding: 12px 15px; border-radius: 10px; font-size: 14px;
+      margin-bottom: 8px; background: white; border: 1px solid var(--glass-border);
+      color: var(--primary-color); font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    /* 主內容 */
+    .main-content {
+      flex-grow: 1;
+      padding: 30px 40px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .section-header {
+      font-size: 1.2rem; color: var(--primary-color); font-weight: 800;
+      border-left: 5px solid var(--accent-color); padding-left: 15px; margin-bottom: 5px;
+    }
+
+    .card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      border-radius: var(--border-radius-main);
+      padding: 30px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.02);
+      margin-bottom: 20px;
+    }
+
+    .q-block { margin-bottom: 25px; }
+    .q-title { font-weight: 800; color: #1a202c; margin-bottom: 10px; display: block; font-size: 16px; }
+    
+    .notice-card {
+      background: rgba(239, 83, 80, 0.05); border: 1px solid rgba(239, 83, 80, 0.2);
+      padding: 20px; border-radius: 12px; margin-bottom: 25px;
+    }
+    .notice-item { font-size: 14.5px; color: #b71c1c; font-weight: bold; margin-bottom: 8px; line-height: 1.6; }
+
+    ul, ol { padding-left: 20px; margin: 0; }
+    li { font-size: 15px; margin-bottom: 8px; line-height: 1.7; color: #2d3748; }
+
+    .sub-title { font-weight: bold; color: var(--primary-color); margin-bottom: 8px; display: block; }
+
+    .btn-submit {
+      background: var(--primary-color); color: white; border: none;
+      padding: 18px 40px; border-radius: 50px; cursor: pointer;
+      font-weight: bold; font-family: 'Orbitron'; transition: 0.3s;
+      float: right; margin-top: 20px;
+      box-shadow: 0 4px 15px rgba(106, 27, 154, 0.2);
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(106, 27, 154, 0.4); }
+
+    @media (max-width: 992px) {
+      body { flex-direction: column; height: auto; overflow: visible; }
+      .sidebar { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="brand-area">
+      <h2>采盟資訊部</h2>
+      <div style="font-size: 11px; color: var(--accent-color); margin-top: 5px; font-weight: bold;">GENERAL ASSESSMENT</div>
+    </div>
+    <div class="nav-list">
+      <div class="nav-item">考題說明</div>
+      <div class="nav-item">一、邏輯測驗</div>
+      <div class="nav-item">二、業績表</div>
+    </div>
+    <div style="margin-top: auto; padding: 20px; background: white; border-radius: 15px; border: 1px solid var(--glass-border);">
+      <div style="font-size: 12px; color: var(--text-sub);">有問題請撥打分機</div>
+      <div style="font-family: Orbitron; font-size: 22px; font-weight: 900; color: var(--primary-color);">#780</div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    
+    <!-- 考題注意事項 -->
+    <div class="notice-card">
+      <div class="notice-item">注意：考題請勿拍照外流，考試題目請用 Java 撰寫作答。</div>
+      <div class="notice-item" style="color: var(--text-main); font-weight: normal;">
+        考題說明： 考題已放置電腦桌面上。每一題要開新分頁去作答，頁籤要以題號命名，每一頁要有標題及製表人（放右下方）。
+      </div>
+    </div>
+
+    <!-- 一、 邏輯測驗 -->
+    <div class="section-header">一、 邏輯測驗</div>
+    <div class="card">
+      <span class="sub-title">基礎題：</span>
+      <ol>
+        <li>計程車每輛限乘客 4 名，李家 15 人一同外出，應該租幾輛計程車？</li>
+        <li>一個大木箱內有 2 個中木箱，每個中木箱有 4 個小木箱，總共幾個木箱？</li>
+        <li>2 頭牛可換 3 隻豬，6 隻豬可換 8 隻羊，40 隻羊可換幾頭牛？</li>
+        <li>請計算出下圖問題</li>
+        <img src="./img/all.png" alt="邏輯測驗圖" class="logic-img">
+    </ol>
+    </div>
+
+    <!-- 二、 業績表 -->
+    <div class="section-header">二、 業績表（檔名：考試-excel 業績表）</div>
+    <div class="card">
+      <ul style="list-style-type: square;">
+        <li>明細頁增加 1 欄總金額、總金額 = 數量 × 單價、總金額要有 "$"，3 位 1 撇、右靠。</li>
+        <li>將營報及店號分開、各自為一欄。</li>
+        <li>日期及門市篩選。</li>
+        <li>產出一張店的每日業績。</li>
+        <li>產出一張 Top sales 前 5 名。</li>
+        <li>產出一張每家店賣最好的商品。</li>
+      </ul>
+      
+      <div style="margin-top: 25px;">
+        <span class="sub-title">樞紐分析（檔名：樞紐分析-面試）：</span>
+        <p style="font-size: 15px; padding-left: 20px;">呈現結果如桌面上 [樞紐分析結果]。</p>
+      </div>
+      
+
+    </div>
+
+  </main>
+
+</body>
+</html>

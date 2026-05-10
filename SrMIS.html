@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>采盟-人才評測系統 | 資深維運 MIS 測驗</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=PingFang+TC:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #6a1b9a; 
+      --accent-color: #00bcd4;
+      --danger-color: #ef5350;
+      --text-main: #2d3748;
+      --text-sub: #718096;
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.5);
+      --border-radius-main: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      background: linear-gradient(135deg, #f5fbfb 0%, #ffffff 100%);
+      font-family: 'PingFang TC', sans-serif;
+      margin: 0;
+      display: flex;
+      color: var(--text-main);
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* 側邊導覽 */
+    .sidebar {
+      width: 280px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(25px);
+      padding: 35px 20px;
+      border-right: 1px solid var(--glass-border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .brand-area h2 { font-family: 'Orbitron'; font-size: 1.3rem; margin: 0; color: var(--primary-color); letter-spacing: 1px; }
+    
+    .nav-list { margin-top: 30px; list-style: none; padding: 0; }
+    .nav-item {
+      padding: 12px 15px; border-radius: 10px; font-size: 14px;
+      margin-bottom: 8px; background: white; border: 1px solid var(--glass-border);
+      color: var(--primary-color); font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    /* 主內容 */
+    .main-content {
+      flex-grow: 1;
+      padding: 30px 40px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .section-header {
+      font-size: 1.2rem; color: var(--primary-color); font-weight: 800;
+      border-left: 5px solid var(--accent-color); padding-left: 15px; margin-bottom: 5px;
+    }
+
+    .card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      border-radius: var(--border-radius-main);
+      padding: 30px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.02);
+    }
+
+    .q-block { margin-bottom: 30px; }
+    .q-title { font-weight: 800; color: #1a202c; margin-bottom: 10px; display: block; font-size: 16px; }
+    .scenario { background: rgba(0, 188, 212, 0.05); padding: 15px; border-radius: 10px; font-size: 14.5px; margin: 10px 0; line-height: 1.6; border-left: 3px solid var(--accent-color); }
+    
+    ul, ol { padding-left: 20px; margin: 0; }
+    li { font-size: 15px; margin-bottom: 8px; line-height: 1.7; color: #2d3748; }
+
+    .btn-submit {
+      background: var(--primary-color); color: white; border: none;
+      padding: 18px 40px; border-radius: 50px; cursor: pointer;
+      font-weight: bold; font-family: 'Orbitron'; transition: 0.3s;
+      float: right; margin-top: 20px;
+      box-shadow: 0 4px 15px rgba(106, 27, 154, 0.2);
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(106, 27, 154, 0.4); }
+
+    @media (max-width: 992px) {
+      body { flex-direction: column; height: auto; overflow: visible; }
+      .sidebar { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="brand-area">
+      <h2>資深維運 MIS </h2>
+    </div>
+    <div class="nav-list">
+      <div class="nav-item">一、系統問題</div>
+      <div class="nav-item">二、實作題</div>
+      <div class="nav-item">三、經驗問題</div>
+      <div class="nav-item">四、溝通與邏輯</div>
+    </div>
+    <div style="margin-top: auto; text-align: center; padding: 20px; background: rgba(239, 83, 80, 0.05); border-radius: 15px;">
+      <div style="font-size: 12px; color: var(--danger-color); font-weight: bold;">最晚繳卷時間</div>
+      <div style="font-family: Orbitron; font-size: 28px; font-weight: 900; color: var(--danger-color);">17:00</div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    
+    <div class="section-header">一、系統問題：維運面試測驗題</div>
+    <div class="card">
+      <div class="q-block">
+        <span class="q-title">1. 基礎觀念</span>
+        <p>請描述實體主機與虛擬主機 ESXI？</p>
+      </div>
+
+      <div class="q-block">
+        <span class="q-title">2. 網路與防火牆設定</span>
+        <div class="scenario">
+          情境描述： 若 F5 網段為 192.168.55.X，Server IP 為 10.1.121.99 。<br>
+          圖示涉及組件： F5、DMZ SW、CP、Server、PA 。
+        </div>
+        <p style="font-weight: bold;">問題：</p>
+        <ul>
+          <li>若要讓 F5 網段與 Server 雙向可通，防火牆 Policy（策略）該如何設定？</li>
+          <li>若不通該如何排除？</li>
+        </ul>
+      </div>
+
+      <div class="q-block">
+        <span class="q-title">3. 路由設定</span>
+        <div class="scenario">
+          情境描述：<br>
+          Server 原本的 Default Route（預設路由）設為內網（Gateway: 192.168.25.254，連接內網 SW） 。<br>
+          Internet 端的 FireWall Gateway 為 10.3.187.254 。
+        </div>
+        <p><strong>問題：</strong> 該如何將 Default Route 指向 Internet？（提示：設定兩張網卡） 。</p>
+      </div>
+    </div>
+
+    <div class="section-header">二、實作題（ESXi 環境建立）</div>
+    <div class="card">
+      <div class="scenario" style="border-left-color: var(--primary-color);">
+        <strong>環境資訊：</strong><br>
+        • ESXi 底層 IP：10.99.50.170（由采盟資訊部同仁協助登入） 。<br>
+        • 硬體配置要求：C 槽 80G、D 槽 80G、RAM 4G 。<br>
+        • ISO 檔路徑： 位於 Server 上，包含 SSD 與 HDD 儲存路徑 。
+      </div>
+      <p style="font-weight: bold;">任務要求：</p>
+      <ol>
+        <li>建立 Windows Server 2008 環境： IP 設定於 10.99.50.X 範圍 。</li>
+        <li>建立 Win10 環境： IP 設定於 10.99.50.X 範圍 。</li>
+        <li>檔案共用測試： 在 Server 上建立 wincm_Test 資料夾，Windows 10 必須能以網芳（網路芳鄰，SMB）方式存取該資料夾 。</li>
+      </ol>
+    </div>
+
+    <div class="section-header">三、經驗問題（若無經驗可寫無）</div>
+    <div class="card">
+      <ul>
+        <li>請問是否有採購過資訊設備？項目為何？請說明流程 。</li>
+        <li>是否有使用過雲端產品？使用過哪些項目？ 。</li>
+      </ul>
+    </div>
+
+    <div class="section-header">四、溝通與邏輯</div>
+    <div class="card">
+      <div class="q-block">
+        <ul>
+          <li>如何將網路設備遇到的技術問題敘述給非技術人員聽？</li>
+          <li>公司發生資安攻擊事件，步驟該如何處理？</li>
+        </ul>
+      </div>
+  
+    </div>
+
+  </main>
+
+</body>
+</html>

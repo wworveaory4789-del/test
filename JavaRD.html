@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>采盟-人才評測系統 | Java 軟體工程師</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=PingFang+TC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #6a1b9a; 
+      --accent-color: #00bcd4;
+      --danger-color: #ef5350;
+      --text-main: #2d3748;
+      --text-sub: #718096;
+      --glass-bg: rgba(255, 255, 255, 0.78);
+      --glass-border: rgba(255, 255, 255, 0.4);
+      --border-radius-main: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      background: linear-gradient(135deg, #f0f7f8 0%, #ffffff 100%);
+      font-family: 'PingFang TC', 'Inter', sans-serif;
+      margin: 0;
+      display: flex;
+      color: var(--text-main);
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* 左側資訊欄 */
+    .sidebar {
+      width: 320px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(25px);
+      padding: 35px 20px;
+      border-right: 1px solid var(--glass-border);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+
+    .brand-area h2 { font-family: 'Orbitron'; font-size: 1.3rem; margin: 0; letter-spacing: 1px; color: var(--primary-color); }
+    
+    .exam-list {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .exam-item {
+      background: white;
+      padding: 12px 15px;
+      border-radius: 10px;
+      font-size: 13px;
+      border: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+    .exam-item.active {
+      border-left: 4px solid var(--primary-color);
+      background: rgba(106, 27, 154, 0.05);
+      font-weight: bold;
+    }
+
+    /* 主內容區 */
+    .main-content {
+      flex-grow: 1;
+      padding: 30px 40px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem; color: var(--primary-color);
+      border-bottom: 2px solid var(--accent-color);
+      padding-bottom: 8px;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .content-box {
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      border-radius: var(--border-radius-main);
+      padding: 20px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    }
+
+    table {
+      width: 100%; border-collapse: collapse; margin: 10px 0;
+      background: white; border-radius: 10px; overflow: hidden;
+    }
+    th { background: #f8fafc; padding: 10px; font-size: 13px; text-align: left; color: var(--primary-color); }
+    td { padding: 8px 10px; border-bottom: 1px solid #edf2f7; font-size: 13px; }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 25px;
+    }
+
+    /* 右側帳密與輸出區 */
+    .right-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .info-card-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .info-card {
+      background: white; border-radius: 12px; padding: 12px;
+      border-top: 3px solid var(--primary-color);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+    .info-card h4 { margin: 0 0 5px 0; font-size: 10px; color: var(--text-sub); text-transform: uppercase; }
+    .info-card p { margin: 0; font-family: 'JetBrains Mono'; font-weight: bold; font-size: 13px; color: var(--primary-color); }
+
+    .code-output-box {
+      background: #1e1e1e; border-radius: 12px; padding: 20px;
+      color: #d4d4d4; font-family: 'JetBrains Mono', monospace; font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .btn-submit {
+      background: var(--primary-color); color: white; border: none;
+      padding: 15px; border-radius: 50px; width: 100%;
+      font-weight: bold; font-family: 'Orbitron'; cursor: pointer;
+      transition: 0.3s;
+    }
+    .btn-submit:hover { background: #4a148c; box-shadow: 0 8px 25px rgba(106, 27, 154, 0.4); }
+
+    @media (max-width: 1200px) {
+      .grid-container { grid-template-columns: 1fr; }
+      body { flex-direction: column; height: auto; overflow: visible; }
+      .sidebar { width: 100%; min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="brand-area">
+      <h2>Java 軟體工程師</h2>
+    </div>
+
+    <div style="margin-top: 20px;">
+      <div style="font-size: 12px; font-weight: bold; color: var(--text-sub); margin-bottom: 10px; font-family: 'Orbitron';">EXAM LIST</div>
+      <div class="exam-list">
+        <div class="exam-item active">
+          <span>01. Java 基礎考題</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div style="margin-top: auto; padding: 15px; background: rgba(0,188,212,0.1); border-radius: 10px; text-align: center;">
+      <h5 style="margin:0; font-size: 10px; color: var(--accent-color);">最晚繳卷時間</h5>
+      <div style="font-family: Orbitron; font-size: 22px; font-weight: bold;">17:00</div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    
+    <div class="section-title">01. 考試目的</div>
+    <div class="content-box">
+      <p style="margin:0; line-height: 1.6; font-size: 14px;">
+        本測驗旨在評估考生對於程式設計邏輯、物件導向結構化設計能力、以及可維護性與輸出格式清晰度之掌握。
+      </p>
+    </div>
+
+    <div class="section-title">02. 題目說明</div>
+    <div class="content-box">
+      <div class="info-card-group">
+        <div class="info-card">
+          <h4>登入密碼</h4>
+          <p>login@12371287</p>
+        </div>
+        <div class="info-card">
+          <h4>登入密碼</h4>
+          <p>P@ssw0rd</p>
+        </div>
+      </div>
+      <p style="margin-bottom: 15px; font-size: 14px; line-height: 1.6;">
+        請以 Java 撰寫一套簡易 POS（銷售系統）計算邏輯，依據題目要求計算各商品小計、會員折扣、小計後滿額折抵與最終應收金額，並以格式化輸出顯示結果。
+      </p>
+      <div style="font-size: 13px; color: var(--primary-color); font-weight: bold;">評核重點：</div>
+      <ul style="font-size: 13px; line-height: 1.8; color: var(--text-sub); margin: 5px 0 15px 0;">
+        <li>程式邏輯：小計前折扣、滿額後折抵邏輯順序正確。</li>
+        <li>程式架構：有良好結構化（例如用 class 封裝商品）。</li>
+        <li>可維護性：折扣規則易於修改（非寫死在多處）。</li>
+        <li>輸出清晰度：輸出明確、格式對齊、易於閱讀。</li>
+      </ul>
+      
+      <div style="font-size: 13px; color: var(--primary-color); font-weight: bold;">商品主檔列表：</div>
+      <table>
+        <thead>
+          <tr><th>品號</th><th>品名</th><th>單價</th><th>數量</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>A001</td><td>酒類</td><td>900</td><td>1</td></tr>
+          <tr><td>A002</td><td>酒類</td><td>1200</td><td>1</td></tr>
+          <tr><td>B001</td><td>鳳梨酥</td><td>360</td><td>1</td></tr>
+          <tr><td>B002</td><td>台產</td><td>350</td><td>1</td></tr>
+          <tr><td>C001</td><td>伴手禮</td><td>600</td><td>1</td></tr>
+          <tr><td>C002</td><td>巧克力</td><td>120</td><td>1</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid-container">
+      <div>
+        <div class="section-title">03. 計算規則</div>
+        <div class="content-box">
+          <ul style="font-size: 13px; line-height: 2; padding-left: 20px; margin: 0;">
+            <li><strong>基本銷售計算：</strong>每筆交易包含多筆商品資料。計算每項商品小計（單價 × 數量），再加總為銷售金額。</li>
+            <li><strong>會員折扣（小計前活動）：</strong>若顧客為會員，享有 <span style="color: var(--danger-color); font-weight: bold;">95 折</span>（商品單價 × 0.95 再計入小計）。</li>
+            <li><strong>滿額折抵（小計後活動）：</strong>
+              <br>• 若總金額達到 1000 元，折抵 100 元。
+              <br>• 若總金額達到 2000 元，折抵 200 元。
+              <br>• 依照等比例級距，依此類推。若未達門檻，無折抵。
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="right-sidebar">
+        <div class="section-title">04.輸出要求</div>
+        
+    
+
+        <div class="code-output-box">
+          <div style="color: #6a9955; margin-bottom: 8px;">//請輸出以下購買商品明細之 JAVA 程式碼結果：</div>
+          <div style="font-size: 11px;">
+            A001 酒類 (900) x 2<br>
+            B002 台產 (350) x 10<br>
+            C003 巧克力 (120) x 3
+          </div>
+          <div style="margin-top: 12px; border-top: 1px solid #444; padding-top: 8px; color: #ce9178;">
+            需包含：<br>
+            • 會員折扣後金額<br>
+            • 滿額折抵金額<br>
+            • 最終應收金額
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>
