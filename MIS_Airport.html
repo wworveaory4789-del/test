@@ -1,185 +1,314 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>采盟-人才評測系統 | 綜合測驗</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=PingFang+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>資訊維運人員 (桃園機場)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=PingFang+TC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <style>
-/* 針對邏輯測驗圖片的優化 */
-.logic-img {
-    max-width: 150px;     /* 限制最大寬度，您可以依需求調整數值 */
-    width: 100%;          /* 在小螢幕時自動縮放 */
-    height: auto;
-    margin-top: 15px;
-    border-radius: 12px;  /* 圓角化 */
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* 輕微陰影 */
+<style>
+:root {
+--primary-color: #6a1b9a;
+--accent-color: #00bcd4;
+--danger-color: #ef5350;
+--text-main: #2d3748;
+--text-sub: #718096;
+--glass-bg: rgba(255, 255, 255, 0.78);
+--glass-border: rgba(255, 255, 255, 0.4);
+--border-radius-main: 18px;
 }
 
-    :root {
-      --primary-color: #6a1b9a; 
-      --accent-color: #00bcd4;
-      --danger-color: #ef5350;
-      --text-main: #2d3748;
-      --text-sub: #718096;
-      --glass-bg: rgba(255, 255, 255, 0.85);
-      --glass-border: rgba(255, 255, 255, 0.5);
-      --border-radius-main: 18px;
-    }
+* { box-sizing: border-box; }
+body {
+background: linear-gradient(135deg, #f0f7f8 0%, #ffffff 100%);
+font-family: 'PingFang TC', 'Inter', sans-serif;
+margin: 0;
+display: flex;
+color: var(--text-main);
+height: 100vh;
+overflow: hidden;
+}
 
-    * { box-sizing: border-box; }
-    body {
-      background: linear-gradient(135deg, #f5fbfb 0%, #ffffff 100%);
-      font-family: 'PingFang TC', sans-serif;
-      margin: 0;
-      display: flex;
-      color: var(--text-main);
-      height: 100vh;
-      overflow: hidden;
-    }
+/* 左側資訊欄 */
+.sidebar {
+width: 320px;
+background: var(--glass-bg);
+backdrop-filter: blur(25px);
+padding: 35px 20px;
+border-right: 1px solid var(--glass-border);
+display: flex;
+flex-direction: column;
+gap: 20px;
+flex-shrink: 0;
+}
 
-    /* 側邊導覽 */
-    .sidebar {
-      width: 280px;
-      background: var(--glass-bg);
-      backdrop-filter: blur(25px);
-      padding: 35px 20px;
-      border-right: 1px solid var(--glass-border);
-      display: flex;
-      flex-direction: column;
-      flex-shrink: 0;
-    }
+.brand-area h2 { font-family: 'Orbitron'; font-size: 1.3rem; margin: 0; letter-spacing: 1px; color: var(--primary-color); }
+.exam-list {
+margin-top: 10px;
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
 
-    .brand-area h2 { font-family: 'Orbitron'; font-size: 1.3rem; margin: 0; color: var(--primary-color); letter-spacing: 1px; }
-    
-    .nav-list { margin-top: 30px; list-style: none; padding: 0; }
-    .nav-item {
-      padding: 12px 15px; border-radius: 10px; font-size: 14px;
-      margin-bottom: 8px; background: white; border: 1px solid var(--glass-border);
-      color: var(--primary-color); font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-    }
+.exam-item {
+background: white;
+padding: 12px 15px;
+border-radius: 10px;
+font-size: 13px;
+border: 1px solid var(--glass-border);
+display: flex;
+align-items: center;
+gap: 10px;
+transition: 0.3s;
+cursor: pointer;
+color: var(--text-main);
+}
+.exam-item:hover {
+background: rgba(106, 27, 154, 0.02);
+}
+.exam-item.active {
+border-left: 4px solid var(--primary-color);
+background: rgba(106, 27, 154, 0.05);
+font-weight: bold;
+color: var(--primary-color);
+}
 
-    /* 主內容 */
-    .main-content {
-      flex-grow: 1;
-      padding: 30px 40px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-    }
+/* 主內容區 */
+.main-content {
+flex-grow: 1;
+padding: 30px 40px;
+overflow-y: auto;
+display: flex;
+flex-direction: column;
+gap: 25px;
+}
 
-    .section-header {
-      font-size: 1.2rem; color: var(--primary-color); font-weight: 800;
-      border-left: 5px solid var(--accent-color); padding-left: 15px; margin-bottom: 5px;
-    }
+.tab-content {
+display: none; /* 預設隱藏 */
+}
+.tab-content.active {
+display: block; /* 啟用的顯示 */
+}
 
-    .card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(15px);
-      border-radius: var(--border-radius-main);
-      padding: 30px;
-      border: 1px solid var(--glass-border);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.02);
-      margin-bottom: 20px;
-    }
+.section-title, .section-header {
+font-family: 'Orbitron', 'PingFang TC', sans-serif;
+font-size: 1.1rem; color: var(--primary-color);
+border-bottom: 2px solid var(--accent-color);
+padding-bottom: 8px;
+margin-bottom: 15px;
+display: flex; align-items: center; gap: 10px;
+font-weight: 800;
+}
 
-    .q-block { margin-bottom: 25px; }
-    .q-title { font-weight: 800; color: #1a202c; margin-bottom: 10px; display: block; font-size: 16px; }
-    
-    .notice-card {
-      background: rgba(239, 83, 80, 0.05); border: 1px solid rgba(239, 83, 80, 0.2);
-      padding: 20px; border-radius: 12px; margin-bottom: 25px;
-    }
-    .notice-item { font-size: 14.5px; color: #b71c1c; font-weight: bold; margin-bottom: 8px; line-height: 1.6; }
+.content-box, .card {
+background: var(--glass-bg);
+backdrop-filter: blur(15px);
+border-radius: var(--border-radius-main);
+padding: 20px;
+border: 1px solid var(--glass-border);
+box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+margin-bottom: 20px;
+}
 
-    ul, ol { padding-left: 20px; margin: 0; }
-    li { font-size: 15px; margin-bottom: 8px; line-height: 1.7; color: #2d3748; }
+/* 邏輯測驗圖片 */
+.logic-img {
+max-width: 150px;
+width: 100%;
+height: auto;
+margin-top: 15px;
+border-radius: 12px;
+border: 1px solid var(--glass-border);
+box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
 
-    .sub-title { font-weight: bold; color: var(--primary-color); margin-bottom: 8px; display: block; }
+.notice-card {
+background: rgba(239, 83, 80, 0.05); border: 1px solid rgba(239, 83, 80, 0.2);
+padding: 20px; border-radius: 12px; margin-bottom: 25px;
+}
+.notice-item { font-size: 14.5px; color: #b71c1c; font-weight: bold; margin-bottom: 8px; line-height: 1.6; }
 
-    .btn-submit {
-      background: var(--primary-color); color: white; border: none;
-      padding: 18px 40px; border-radius: 50px; cursor: pointer;
-      font-weight: bold; font-family: 'Orbitron'; transition: 0.3s;
-      float: right; margin-top: 20px;
-      box-shadow: 0 4px 15px rgba(106, 27, 154, 0.2);
-    }
-    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(106, 27, 154, 0.4); }
+table {
+width: 100%; border-collapse: collapse; margin: 10px 0;
+background: white; border-radius: 10px; overflow: hidden;
+}
+th { background: #f8fafc; padding: 10px; font-size: 13px; text-align: left; color: var(--primary-color); }
+td { padding: 8px 10px; border-bottom: 1px solid #edf2f7; font-size: 13px; }
 
-    @media (max-width: 992px) {
-      body { flex-direction: column; height: auto; overflow: visible; }
-      .sidebar { width: 100%; }
-    }
-  </style>
+.grid-container {
+display: grid;
+grid-template-columns: 1fr 380px;
+gap: 25px;
+}
+
+.info-card-group {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 10px;
+margin-bottom: 15px;
+}
+
+.info-card {
+background: white; border-radius: 12px; padding: 12px;
+border-top: 3px solid var(--primary-color);
+box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+.info-card h4 { margin: 0 0 5px 0; font-size: 10px; color: var(--text-sub); text-transform: uppercase; }
+.info-card p { margin: 0; font-family: 'JetBrains Mono'; font-weight: bold; font-size: 13px; color: var(--primary-color); }
+
+.code-output-box {
+background: #1e1e1e; border-radius: 12px; padding: 20px;
+color: #d4d4d4; font-family: 'JetBrains Mono', monospace; font-size: 12px;
+line-height: 1.6;
+}
+
+ul, ol { padding-left: 20px; }
+li { font-size: 14px; margin-bottom: 8px; line-height: 1.7; }
+.sub-title { font-weight: bold; color: var(--primary-color); margin-bottom: 8px; display: block; }
+
+@media (max-width: 1200px) {
+.grid-container { grid-template-columns: 1fr; }
+body { flex-direction: column; height: auto; overflow: visible; }
+.sidebar { width: 100%; }
+}
+</style>
 </head>
 <body>
 
-  <aside class="sidebar">
-    <div class="brand-area">
-      <h2>采盟資訊部</h2>
-      <div style="font-size: 11px; color: var(--accent-color); margin-top: 5px; font-weight: bold;">GENERAL ASSESSMENT</div>
-    </div>
-    <div class="nav-list">
-      <div class="nav-item">考題說明</div>
-      <div class="nav-item">一、邏輯測驗</div>
-      <div class="nav-item">二、業績表</div>
-    </div>
-    <div style="margin-top: auto; padding: 20px; background: white; border-radius: 15px; border: 1px solid var(--glass-border);">
-      <div style="font-size: 12px; color: var(--text-sub);">有問題請撥打分機</div>
-      <div style="font-family: Orbitron; font-size: 22px; font-weight: 900; color: var(--primary-color);">#780</div>
-    </div>
-  </aside>
+<aside class="sidebar">
+<div class="brand-area">
+<h2>資訊維運人員 (桃園機場)</h2>
+</div>
 
-  <main class="main-content">
-    
-    <!-- 考題注意事項 -->
-    <div class="notice-card">
-      <div class="notice-item">注意：考題請勿拍照外流，考試題目請用 Java 撰寫作答。</div>
-      <div class="notice-item" style="color: var(--text-main); font-weight: normal;">
-        考題說明： 考題已放置電腦桌面上。每一題要開新分頁去作答，頁籤要以題號命名，每一頁要有標題及製表人（放右下方）。
-      </div>
-    </div>
+<div style="margin-top: 20px;">
+<div style="font-size: 12px; font-weight: bold; color: var(--text-sub); margin-bottom: 10px; font-family: 'Orbitron';">EXAM LIST</div>
+<div class="exam-list">
+<div class="exam-item active" onclick="switchTab('general-exam', this)">
+<span>01.綜合測驗</span>
+</div>
+<div class="exam-item" onclick="switchTab('airport-exam', this)">
+<span>02.維運人員面試測試題</span>
+</div>
+</div>
+</div>
 
-    <!-- 一、 邏輯測驗 -->
-    <div class="section-header">一、 邏輯測驗</div>
+<div style="margin-top: auto;">
+<div style="padding: 15px; background: white; border-radius: 10px; border: 1px solid var(--glass-border); margin-bottom: 15px; text-align: center;">
+<div style="font-size: 11px; color: var(--text-sub);">有問題請撥打分機</div>
+<div style="font-family: Orbitron; font-size: 20px; font-weight: 900; color: var(--primary-color);">#780</div>
+</div>
+<div style="padding: 15px; background: rgba(0,188,212,0.1); border-radius: 10px; text-align: center;">
+<h5 style="margin:0; font-size: 10px; color: var(--accent-color);">最晚繳卷時間</h5>
+<div style="font-family: Orbitron; font-size: 22px; font-weight: bold;">17:00</div>
+</div>
+</div>
+</aside>
+
+<main class="main-content">
+
+<div id="general-exam" class="tab-content active">
+<div class="notice-card">
+<div class="notice-item">注意：考題請勿拍照外流，考試題目請用 Java 撰寫作答。</div>
+<div class="notice-item" style="color: var(--text-main); font-weight: normal;">
+考題說明： 考題已放置電腦桌面上。每一題要開新分頁去作答，頁籤要以題號命名，每一頁要有標題及製表人（放右下方）。
+</div>
+</div>
+
+<div class="section-header">一、 邏輯測驗</div>
+<div class="card">
+<span class="sub-title">基礎題：</span>
+<ol>
+<li>計程車每輛限乘客 4 名，李家 15 人一同外出，應該租幾輛計程車？</li>
+<li>一個大木箱內有 2 個中木箱，每個中木箱有 4 個小木箱，總共幾個木箱？</li>
+<li>2 頭牛可換 3 隻豬，6 隻豬可換 8 隻羊，40 隻羊可換幾頭牛？</li>
+<li>請計算出下圖問題</li>
+<img src="./img/all.png" alt="邏輯測驗圖" class="logic-img">
+</ol>
+</div>
+
+<div class="section-header">二、 業績表（檔名：考試-excel 業績表）</div>
+<div class="card">
+<ul style="list-style-type: square;">
+<li>明細頁增加 1 欄總金額、總金額 = 數量 × 單價、總金額要有 "$"，3 位 1 撇、右靠。</li>
+<li>將營報及店號分開、各自為一欄。</li>
+<li>日期及門市篩選。</li>
+<li>產出一張店的每日業績。</li>
+<li>產出一張 Top sales 前 5 名。</li>
+<li>產出一張每家店賣最好的商品。</li>
+</ul>
+<div style="margin-top: 25px;">
+<span class="sub-title">樞紐分析（檔名：樞紐分析-面試）：</span>
+<p style="font-size: 14px; padding-left: 20px;">呈現結果如桌面上 [樞紐分析結果]。</p>
+</div>
+</div>
+</div>
+
+<div id="airport-exam" class="tab-content">
+    <div class="section-header">● 系統問題</div>
     <div class="card">
-      <span class="sub-title">基礎題：</span>
-      <ol>
-        <li>計程車每輛限乘客 4 名，李家 15 人一同外出，應該租幾輛計程車？</li>
-        <li>一個大木箱內有 2 個中木箱，每個中木箱有 4 個小木箱，總共幾個木箱？</li>
-        <li>2 頭牛可換 3 隻豬，6 隻豬可換 8 隻羊，40 隻羊可換幾頭牛？</li>
-        <li>請計算出下圖問題</li>
-        <img src="./img/all.png" alt="邏輯測驗圖" class="logic-img">
-    </ol>
+        <ol>
+            <li>請描述實體主機與虛擬主機 ESXI？</li>
+            <li>請說明 Windows Server 與 Active Directory 的關係？</li>
+            <li>請列出你會的 CMD 語法 (Windows 或 Linux 皆可)</li>
+            <li>若在 AD 中新增以下資料夾及人員：
+                <ul style="list-style-type: disc; margin-top: 10px; color: var(--text-main);">
+                    <li>資料夾：<strong>ABC01</strong></li>
+                    <li>部門：<strong>營一部</strong></li>
+                    <li>人員：<strong>陳〇〇</strong></li>
+                </ul>
+                <p style="margin-top: 10px;">若資料夾 <strong>ABC01</strong> 可讓營一部全部部門存取，除了該部門 <strong>陳〇〇</strong>，請問以資料夾權限該如何設置？</p>
+            </li>
+        </ol>
     </div>
 
-    <!-- 二、 業績表 -->
-    <div class="section-header">二、 業績表（檔名：考試-excel 業績表）</div>
+    <div class="section-header">5. (實作題) 安裝 POS 機</div>
     <div class="card">
-      <ul style="list-style-type: square;">
-        <li>明細頁增加 1 欄總金額、總金額 = 數量 × 單價、總金額要有 "$"，3 位 1 撇、右靠。</li>
-        <li>將營報及店號分開、各自為一欄。</li>
-        <li>日期及門市篩選。</li>
-        <li>產出一張店的每日業績。</li>
-        <li>產出一張 Top sales 前 5 名。</li>
-        <li>產出一張每家店賣最好的商品。</li>
-      </ul>
-      
-      <div style="margin-top: 25px;">
-        <span class="sub-title">樞紐分析（檔名：樞紐分析-面試）：</span>
-        <p style="font-size: 15px; padding-left: 20px;">呈現結果如桌面上 [樞紐分析結果]。</p>
-      </div>
-      
-
+        <ul style="list-style-type: none; padding-left: 0;">
+            <li style="display: flex; gap: 10px;"><span>▶</span> <span>請依照所提供 SOP 安裝 POS 機。</span></li>
+            <li style="display: flex; gap: 10px;"><span>▶</span> <span>請使用所提供的隨身碟開機 (BIOS 需自行設定開機順序)。</span></li>
+            <li style="display: flex; gap: 10px;"><span>▶</span> 
+                <div>
+                    使用 Ghost 軟體進行 ISO 檔還原，檔案在隨身碟內，路徑如下：<br>
+                    <code style="background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono'; font-size: 13px;">\ISO\POS 55A 原始 Source\</code><br>
+                    <small style="color: var(--text-sub);">(ISO 檔請先複製到 POS 機上，再用 Ghost 讀取)</small><br>
+                    <small style="color: var(--text-sub);">(administrator/system 雙登入，登入密碼：noname)</small>
+                </div>
+            </li>
+            <li style="display: flex; gap: 10px;"><span>▶</span> <span>磁碟分割前要先啟動 Disk Defragment 服務。</span></li>
+            <li style="display: flex; gap: 10px;"><span>▶</span> 
+                <div>
+                    POS 所有安裝軟體均在隨身碟內，路徑如下：<br>
+                    <code style="background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono'; font-size: 13px;">\POS 安裝\</code>
+                </div>
+            </li>
+        </ul>
+        
+        <div class="notice-card" style="margin-top: 20px; margin-bottom: 0;">
+            <div class="notice-item" style="margin-bottom: 0;">
+                💡 若遇到 win7 無法執行軟體，可用所提供的 NB 上網尋找。
+            </div>
+        </div>
     </div>
+</div>
 
-  </main>
+</main>
+
+<script>
+function switchTab(tabId, element) {
+// 1. 隱藏所有內容
+const contents = document.querySelectorAll('.tab-content');
+contents.forEach(content => content.classList.remove('active'));
+
+// 2. 取消所有頁籤的選取狀態
+const items = document.querySelectorAll('.exam-item');
+items.forEach(item => item.classList.remove('active'));
+
+// 3. 顯示點選的內容並標記頁籤
+document.getElementById(tabId).classList.add('active');
+element.classList.add('active');
+}
+</script>
 
 </body>
 </html>
