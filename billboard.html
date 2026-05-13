@@ -36,6 +36,17 @@
       overflow: hidden;
     }
 
+    /* --- 手機端遮罩層 --- */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.2);
+      backdrop-filter: blur(2px);
+      z-index: 999;
+    }
+
     /* --- 手機端漢堡按鈕 --- */
     .mobile-header {
       display: none;
@@ -49,7 +60,6 @@
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid var(--glass-border);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
 
     .menu-toggle {
@@ -67,13 +77,14 @@
       width: 320px;
       background: var(--glass-bg);
       backdrop-filter: blur(25px);
-      min-height: 100vh;
+      height: 100vh;
       box-shadow: 8px 0 30px rgba(0,0,0,0.03);
       padding: 30px 20px;
       flex-shrink: 0;
-      z-index: 100;
+      z-index: 1001;
       border-right: 1px solid var(--glass-border);
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
       transition: transform 0.3s ease;
     }
 
@@ -92,7 +103,7 @@
     }
 
     .category-title {
-      font-size: 14px; color: var(--primary-light); font-weight: 800;
+      font-size: 14px; color: var(--primary-color); font-weight: 800;
       text-transform: uppercase; margin-top: 30px; margin-bottom: 12px; padding-left: 10px;
       letter-spacing: 1.5px; opacity: 0.8;
     }
@@ -106,7 +117,6 @@
     }
 
     .job-item:hover { background: rgba(0, 188, 212, 0.05); color: var(--primary-color); transform: translateX(5px); }
-
     .job-item.active {
       background: white; color: var(--primary-color);
       border-left: 4px solid var(--accent-color);
@@ -114,25 +124,26 @@
       box-shadow: 0 4px 15px rgba(0, 188, 212, 0.15);
     }
 
-    /* --- 主內容區 --- 1*/
+    /* --- 主內容區佈局修正 --- */
     .main-content {
       flex-grow: 1;
       padding: 30px 40px;
-
+      display: flex;
       flex-direction: column;
       gap: 25px;
       max-width: 1200px;
       margin: 0 auto;
-      overflow-y: auto;
+      overflow-y: auto; /* 允許垂直滾動 */
     }
 
     .header-banner {
       background: var(--glass-bg);
       backdrop-filter: blur(20px);
       border: 1px solid var(--glass-border);
-      padding: 10px 15px;
+      padding: 15px 20px;
       border-radius: var(--border-radius-main);
       box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+      flex-shrink: 0;
     }
 
     .header-banner h1 { margin: 0; font-size: 22px; font-weight: 700; }
@@ -154,67 +165,82 @@
     .time-card h5 { margin: 0; color: var(--text-sub); font-size: 10px; }
     .time-card .time { color: var(--text-main); font-size: 15px; font-weight: 700; margin-top: 4px; }
 
+    /* 顯示框優化 */
     .exam-display-box {
       background: var(--glass-bg);
       backdrop-filter: blur(25px);
       border: 1px solid var(--glass-border);
       border-radius: var(--border-radius-main);
-      padding: 10px;
-      min-height: 300px;
+      padding: 15px;
+      min-height: 400px; /* 改為最小高度 */
       position: relative;
-      margin-top: 2%;
+      display: flex;
+      flex-direction: column;
     }
 
-    #targetTitle { font-size: 24px; font-weight: 700; color: var(--text-main); margin-bottom: 25px; display: block; }
+    #targetTitle { font-size: 28px; font-weight: 800; color: var(--text-main); margin-bottom: 25px; display: block; border-left: 6px solid var(--primary-color); padding-left: 15px; }
 
-    .exam-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    /* 網格佈局優化 */
+    .exam-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
+    
     .exam-card {
-      padding: 15px; background: rgba(255, 255, 255, 0.4);
+      padding: 20px; background: rgba(255, 255, 255, 0.5);
       border-radius: 12px; border: 1px solid var(--glass-border);
-      border-top: 3px solid var(--primary-color);
-      margin-bottom: 15px;
+      border-top: 4px solid var(--primary-color);
+      height: fit-content;
     }
-    .exam-card h4 { margin: 0 0 10px 0; color: var(--primary-light); font-size: 11px; text-transform: uppercase; }
-    .exam-content { font-size: 15px; font-weight: 400; color: var(--text-main); line-height: 1.6; }
-    /* 工作內容區塊加強字體 */
+    
+    /* 讓工作內容獨立佔滿一行，防止文字爆版 */
+    .job-content-card { grid-column: span 2; border-top-color: var(--accent-color); }
+
+    .exam-card h4 { margin: 0 0 15px 0; color: var(--primary-dark); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+    .exam-content { font-size: 12px; font-weight: 500; color: var(--text-main); line-height: 1.8; }
     #content { font-weight: 600; white-space: pre-line; }
+
+    .footer-action {
+      margin-top: auto; /* 推至底部 */
+      text-align: right;
+      padding-top: 20px;
+    }
 
     .info-box {
       background: rgba(255, 255, 255, 0.5);
       border-radius: var(--border-radius-main);
       padding: 20px 35px;
       border: 1px solid var(--glass-border);
-      margin-top: auto; 
-      margin-bottom: 20px;
+      flex-shrink: 0;
+      /* margin-top: 10%; */
     }
 
     .info-title { font-size: 16px; color: var(--accent-color); font-weight: 700; margin-bottom: 12px; }
-    .info-list { list-style: none; padding: 0; margin: 0; font-size: 13px; line-height: 1.6; color: var(--text-sub); }
+    .info-list { list-style: none; padding: 0; margin: 0; font-size: 13px; line-height: 1.8; color: var(--text-sub); }
     .info-list li { position: relative; padding-left: 20px; margin-bottom: 5px; }
-    .info-list li::before { content: "→"; position: absolute; left: 0; color: var(--primary-light); font-weight: bold; }
+    .info-list li::before { content: "→"; position: absolute; left: 0; color: var(--primary-color); font-weight: bold; }
 
     .btn-submit {
-      background: transparent; color: var(--accent-color); border: 2px solid var(--accent-color);
-      padding: 12px 30px; border-radius: 50px; cursor: pointer; font-weight: 700;
-      font-size: 13px; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
-      margin-top: 25px;
+      background: var(--accent-color); color: white; border: none;
+      padding: 14px 40px; border-radius: 50px; cursor: pointer; font-weight: 700;
+      font-size: 14px; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
+      box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3);
     }
-    .btn-submit:hover { background: var(--accent-color); color: #fff; box-shadow: 0 0 20px rgba(0, 188, 212, 0.4); }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 188, 212, 0.5); }
 
+    /* 紅色箭頭 */
     .tech-arrow {
-      display: inline-block; width: 50px; height: 50px; border: 3px solid var(--danger-color);
+      display: inline-block; width: 60px; height: 60px; border: 3px solid var(--danger-color);
       border-radius: 50%; position: relative; margin-bottom: 20px;
       box-shadow: 0 0 10px rgba(239, 83, 80, 0.5); animation: arrow-pulse 2s infinite;
+      cursor: pointer;
     }
     .tech-arrow::after {
       content: ''; position: absolute; top: 50%; left: 50%;
       transform: translate(-30%, -50%) rotate(45deg);
-      width: 15px; height: 15px; border-bottom: 3px solid var(--danger-color); border-left: 3px solid var(--danger-color);
+      width: 18px; height: 18px; border-bottom: 4px solid var(--danger-color); border-left: 4px solid var(--danger-color);
     }
 
     @keyframes arrow-pulse {
       0% { box-shadow: 0 0 10px rgba(239, 83, 80, 0.5); transform: scale(1); }
-      50% { box-shadow: 0 0 20px rgba(239, 83, 80, 0.8); transform: scale(1.05); }
+      50% { box-shadow: 0 0 25px rgba(239, 83, 80, 0.8); transform: scale(1.1); }
       100% { box-shadow: 0 0 10px rgba(239, 83, 80, 0.5); transform: scale(1); }
     }
 
@@ -226,19 +252,23 @@
       .mobile-header { display: flex; }
       .sidebar {
         position: fixed; top: 0; left: 0; transform: translateX(-100%);
-        width: 280px; min-height: 100vh; padding-top: 80px;
+        width: 280px; height: 100vh; padding-top: 80px; padding-bottom: 40px;
       }
       .sidebar.active { transform: translateX(0); }
-      .main-content { padding: 80px 15px 20px 15px; }
+      .main-content { padding: 80px 15px 20px 15px; height: auto; }
       .schedule-grid { grid-template-columns: repeat(2, 1fr); }
       .exam-grid { grid-template-columns: 1fr; }
+      .job-content-card { grid-column: span 1; }
+      .sidebar-overlay.active { display: block; }
     }
   </style>
 </head>
 <body>
 
+  <div class="sidebar-overlay" id="overlay" onclick="toggleMenu()"></div>
+
   <div class="mobile-header">
-    <div style="font-family: 'Orbitron'; font-weight: bold; color: var(--primary-color);"> 采盟資訊評測系統</div>
+    <div style="font-family: 'Orbitron'; font-weight: bold; color: var(--primary-color);">采盟資訊評測系統</div>
     <button class="menu-toggle" onclick="toggleMenu()">職務清單</button>
   </div>
 
@@ -250,94 +280,36 @@
        data-content="1. Java Web 系統設計與開發&#10;2. API 設計與整合&#10;3. 資料庫開發與優化&#10;4. 系統維護、重構與 Bug 排除，確保系統穩定性&#10;5. 團隊協作與版本控制">01 Java 軟體工程師</a>
     
     <a class="job-item" data-title="軟體開發課長 / 資深工程師" data-exam1="資深軟體開發面試測試題" data-exam2="Java 進階考題"
-       data-content="1. 負責規劃系統需求，撰寫技術規格書或功能說明書（API、DB Schema、前後端框架）
-       2. 評估新技術導入開發（如第三方串接、測試、使用者優化）
-       3. 程式開發、Code Review
-       4. IT維運協作進行測試、部署、上線
-       5. 確保版本發布流程穩定">02 軟體開發課長/資深</a>
+       data-content="1. 負責規劃系統需求，撰寫技術規格書或功能說明書（API、DB Schema、前後端框架）&#10;2. 評估新技術導入開發（如第三方串接、測試、使用者優化）&#10;3. 程式開發、Code Review&#10;4. IT維運協作進行測試、部署、上線&#10;5. 確保版本發布流程穩定">02 軟體開發課長/資深</a>
     
     <a class="job-item" data-title="軟體開發主管 (SA)" data-exam1="資深軟體開發面試測試題" data-exam2="資料庫測驗題"
-       data-content="1. 系統規劃與需求管理，業務單位需求訪談、分析與文件化
-       2. 系統架構設計（System Architecture Design） 的審核與確認
-       3. 規範資料流（DFD）、模組介面設計標準
-       4. 與開發主管（RD）協作，確保設計可實現、效能與安全性達標，管理 API、資料交換格式設計一致性
-       5. 規劃SA與分派 團隊成員任務，參與專案里程碑評估、驗收與測試階段
-       6. 建立並維護 系統文件標準SA、SOP、使用者手冊
-       7. 業務單位與技術團隊的橋樑，確保雙方共識與理解一致，協調外部供應商（如ERP、POS、雲端平台）技術整合">03 軟體開發主管 (SA)</a>
+       data-content="1. 系統規劃與需求管理，業務單位需求訪談、分析與文件化&#10;2. 系統架構設計 的審核與確認&#10;3. 規範資料流（DFD）、模組介面設計標準&#10;4. 與開發主管（RD）協作，確保設計可實現、效能與安全性達標，管理 API、資料交換格式設計一致性&#10;5. 規劃SA與分派 團隊成員任務，參與專案里程碑評估、驗收與測試階段&#10;6. 建立並維護 系統文件標準SA、SOP、使用者手冊&#10;7. 業務單位與技術團隊的橋樑，確保雙方共識與理解一致，協調外部供應商（如ERP、POS、雲端平台）技術整合">03 軟體開發主管 (SA)</a>
     
     <a class="job-item" data-title="UX/UI 前端工程師" data-exam1="分析推銷網頁架設" data-exam2="未定 / 視面試情況"
-       data-content="1.資訊架構與零售邏輯規劃
-       (1)負責系統產品架構與User Flow梳理
-       (2)深度理解POS銷售、促銷折扣、計算邏輯等複雜業務運作，並產出精確的流程圖，確保系統邏輯在開發前即達到嚴密正確 
-       2.系統架構優化與痛點拆解
-       (1)需與使用者進行訪談(User Research)，將現場操作痛點轉化為設計原型，且具備撰寫測試報告與整理使用者反饋(User Feedback)的能力
-       (2)重新評估現有產品的任務流程(Task Flow)，解決系統性邏輯衝突
-       (3)針對銷售現場、結帳步驟等操作環境進行優化
-       3.系統測試改善
-       (1)負責相關系統測試，深度模擬使用者操作路徑，與後端工程師緊密協作，找出開發端的優化建議
-       (2)執行可用性測試，透過實際觀察與量化數據找出邏輯斷點，提出具體改善策略">04 UX/UI 前端工程師</a>
+       data-content="1.資訊架構與零售邏輯規劃&#10;(1)負責系統產品架構與User Flow梳理&#10;(2)深度理解POS銷售、促銷折扣、計算邏輯等複雜業務運作，並產出精確的流程圖，確保系統邏輯在開發前即達到嚴密正確&#10;2.系統架構優化與痛點拆解&#10;(1)需與使用者進行訪談(User Research)，將現場操作痛點轉化為設計原型，且具備撰寫測試報告與整理使用者反饋(User Feedback)的能力&#10;(2)重新評估現有產品的任務流程(Task Flow)，解決系統性邏輯衝突&#10;(3)針對銷售現場、結帳步驟等操作環境進行優化&#10;3.系統測試改善&#10;(1)負責相關系統測試，深度模擬使用者操作路徑，與後端工程師緊密協作，找出開發端的優化建議&#10;(2)執行可用性測試，透過實際觀察與量化數據找出邏輯斷點，提出具體改善策略">04 UX/UI 前端工程師</a>
 
     <div class="category-title">02 維運 / 資安</div>
     <a class="job-item" data-title="資訊助理 (桃園機場)" data-exam1="維運人員面試題" data-exam2="POS 裝機"
-       data-content="1. 維護更新系統圖、SOP文件製作與修改、系統文件建檔、PC一般維護
-       2. 繪製網路圖(Drow.io、Canva、PPT、Wondershare)、維護網路設備清單、操作網路基本設定
-       3. 協助報表開發及測試，POS、ERP
-       4. 編輯手冊影片、修改PPT報告
-       5. 更新ISO文件與部門行政文件
-       6. 會議記錄文件、手稿電子化">05 資訊助理 (機場)</a>
+       data-content="1. 維護更新系統圖、SOP文件製作與修改、系統文件建檔、PC一般維護&#10;2. 繪製網路圖(Drow.io、Canva、PPT、Wondershare)、維護網路設備清單、操作網路基本設定&#10;3. 協助報表開發及測試，POS、ERP&#10;4. 編輯手冊影片、修改PPT報告&#10;5. 更新ISO文件與部門行政文件&#10;6. 會議記錄文件、手稿電子化">05 資訊助理 (機場)</a>
     
     <a class="job-item" data-title="資訊維運人員 (桃園機場)" data-exam1="維運人員面試題" data-exam2="POS 裝機"
-       data-content="1.需具備IT基礎與維運能力
-       2.需具備良好的溝通能力，能耐心地向非資訊背景的使用者解釋技術問題
-       3.負責PC與POS週邊設備日常維運(電腦、POS、網路、備份)並定期回報
-       4.提供Windows/Office技術支援 
-       5.執行機房維護與店櫃現場IT支援
-       6.異常回報流程、問題排查能力(含Log追蹤、異常分析)
-       7.配合公司需求，完成主管交辦事項
-       8.須配合排班(依一例一休與法定休假規劃月休)">06 資訊維運人員 (機場)</a>
+       data-content="1.需具備IT基礎與維運能力&#10;2.需具備良好的溝通能力，能耐心地向非資訊背景的使用者解釋技術問題&#10;3.負責PC與POS週邊設備日常維運(電腦、POS、網路、備份)並定期回報&#10;4.提供Windows/Office技術支援&#10;5.執行機房維護與店櫃現場IT支援&#10;6.異常回報流程、問題排查能力(含Log追蹤、異常分析)&#10;7.配合公司需求，完成主管交辦事項&#10;8.須配合排班(依一例一休與法定休假規劃月休)">06 資訊維運人員 (機場)</a>
     
     <a class="job-item" data-title="資深維運 MIS (組長或課長)" data-exam1="資深維運人員面試題" data-exam2="VMWare 實裝"
-       data-content="1. 負責管理機房端Server維護、規劃，了解公司架構與日常作業問題排除
-       2. 網路設備管理，規劃網路資安，維運現有網路架構與設備問題排除
-       3. 架構設備需求建議與規劃，確保系統端營運順暢，推動專案執行、團隊與跨部門溝通">07 資深維運 MIS</a>
+       data-content="1. 負責管理機房端Server維護、規劃，了解公司架構與日常作業問題排除&#10;2. 網路設備管理，規劃網路資安，維運現有網路架構與設備問題排除&#10;3. 架構設備需求建議與規劃，確保系統端營運順暢，推動專案執行、團隊與跨部門溝通">07 資深維運 MIS</a>
     
     <a class="job-item" data-title="維運及資安主管" data-exam1="資深維運人員面試題" data-exam2="VMWare 實裝"
-       data-content="1.資訊環境架構安全規劃
-       2.資安事件追蹤與分析，反應處理及調整
-       3.機房維運管理、網路管理、資訊專案推動執行
-       4.負責維護會員個資安全與電子發票傳輸合規性，應對年度資安稽核。
-       5.溝通協調解決維運與資安安全事件，配合執行ISO9000、27001、ESG、個資法運作及驗證稽核">08 維運及資安主管</a>
+       data-content="1.資訊環境架構安全規劃&#10;2.資安事件追蹤與分析，反應處理及調整&#10;3.機房維運管理、網路管理、資訊專案推動執行&#10;4.負責維護會員個資安全與電子發票傳輸合規性，應對年度資安稽核。&#10;5.溝通協調解決維運與資安安全事件，配合執行ISO9000、27001、ESG、個資法運作及驗證稽核">08 維運及資安主管</a>
 
     <div class="category-title">03 專案管理 / 分析</div>
     <a class="job-item" data-title="資訊分析專員/主管" data-exam1="建置指引分析" data-exam2="資訊分析專員術科測驗題組"
-       data-content="1.蒐集並整理營運相關資料（銷售、會員、交易、系統紀錄等）
-       2.使用報表工具（MicroStrategy, MSTR）擷取系統資料，進行資料整理與分析，提供管理決策參考
-       3.分析營運數據趨勢，發現異常或潛在問題並提出建議
-       4.協助各部門進行數據需求訪談與指標定義，將實際問題轉化為可分析之需求文件或可開發文件
-       5.進行資料清理、轉換與彙整，提高資料品質
-       6.視需要製作視覺化圖表或簡報報告
-       7.協助建立數據管理與報表標準化流程
-       8.協助系統測試（UAT）、資料驗證與問題追蹤
-       9.主管交辦之其他數據分析相關事項">09 資訊分析專員/主管</a>
+       data-content="1.蒐集並整理營運相關資料（銷售、會員、交易、系統紀錄等）&#10;2.使用報表工具（MicroStrategy, MSTR）擷取系統資料，進行資料整理與分析，提供管理決策參考&#10;3.分析營運數據趨勢，發現異常或潛在問題並提出建議&#10;4.協助各部門進行數據需求訪談與指標定義，將實際問題轉化為可分析之需求文件或可開發文件&#10;5.進行資料清理、轉換與彙整，提高資料品質&#10;6.視需要製作視覺化圖表或簡報報告&#10;7.協助建立數據管理與報表標準化流程&#10;8.協助系統測試（UAT）、資料驗證與問題追蹤&#10;9.主管交辦之其他數據分析相關事項">09 資訊分析專員/主管</a>
     
     <a class="job-item" data-title="資訊帳務處理專員/主管" data-exam1="建置指引分析" data-exam2="庫存管理與系統診斷考核"
-       data-content="1.負責公司內部資訊系統相關帳務資料之日常處理與核對
-       2.協助 POS、ERP 或相關營運系統之帳務資料匯出、整理與異常比對，將其轉化為需求文件、可開發文件
-       3.進行交易資料檢核，確認金額、筆數與系統紀錄一致
-       4.協助處理帳務異常案件，與資訊單位或窗口聯繫釐清問題
-       5.定期產出帳務相關報表，提供財務或管理單位使用
-       6.協助維護帳務作業流程文件與操作SOP
-       7.支援電子發票、金流或帳務系統相關資料整理與查詢作業
-       8.協助系統測試（UAT）、資料驗證與問題追蹤
-       9.主管交辦之其他資料彙整與行政支援事項
-       10.確保系統產出的財務報表與實際金流 100% 吻合，防範系統邏輯漏洞導致的財務損失。">10 資訊帳務處理專員</a>
+       data-content="1.負責公司內部資訊系統相關帳務資料之日常處理與核對&#10;2.協助 POS、ERP 或相關營運系統之帳務資料匯出、整理與異常比對，將其轉化為需求文件、可開發文件&#10;3.進行交易資料檢核，確認金額、筆數與系統紀錄一致&#10;4.協助處理帳務異常案件，與資訊單位或窗口聯繫釐清問題&#10;5.定期產出帳務相關報表，提供財務或管理單位使用&#10;6.協助維護帳務作業流程文件與操作SOP&#10;7.支援電子發票、金流或帳務系統相關資料整理與查詢作業&#10;8.協助系統測試（UAT）、資料驗證與問題追蹤&#10;9.主管交辦之其他資料彙整與行政支援事項&#10;10.確保系統產出的財務報表與實際金流 100% 吻合，防範系統邏輯漏洞導致的財務損失。">10 資訊帳務處理專員</a>
     
     <a class="job-item" data-title="資訊軟體專案 PM" data-exam1="建置指引分析" data-exam2="庫存管理與系統診斷考核"
-       data-content="1. 負責主導或參與中大型專案(軟體ERP、POS、系統服務導入)，具3~5年以上資訊專案管理經驗佳
-       2. 協助各項資訊專案執行，規劃、跟催專案事項順利
-       3. 具備需求訪談、系統分析與文件撰寫能力(需求規格書、測試計劃、專案報告)
-       4. 具備系統測試、資訊安全等相關技能佳
-       5. 完成專案交辦事項並向上呈報專案進度">11 資訊軟體專案 PM</a>
+       data-content="1. 負責主導或參與中大型專案(軟體ERP、POS、系統服務導入)，具3~5年以上資訊專案管理經驗佳&#10;2. 協助各項資訊專案執行，規劃、跟催專案事項順利&#10;3. 具備需求訪談、系統分析與文件撰寫能力(需求規格書、測試計劃、專案報告)&#10;4. 具備系統測試、資訊安全等相關技能佳&#10;5. 完成專案交辦事項並向上呈報專案進度">11 資訊軟體專案 PM</a>
   </nav>
 
   <main class="main-content">
@@ -350,21 +322,21 @@
         <div class="time-card" style="border-left: 3px solid var(--danger-color);"><h5>最晚繳卷時間</h5><div class="time">17:00</div></div>
       </div>
     </header>
-
+<div>
     <div class="exam-display-box" id="displayBox">
-      <div id="defaultMsg" style="text-align: center; color: var(--text-sub); padding: 40px;">
-        <div class="tech-arrow"></div>
+      <div id="defaultMsg" style="text-align: center; color: var(--text-sub); margin: auto;">
+        <div class="tech-arrow" onclick="toggleMenu()" title="點擊展開職務清單"></div>
         <h3>請點擊職務清單</h3>
         <p>系統將即時啟動該職務之評測項目</p>
       </div>
       
-      <div id="examDetail" style="display: none;">
+      <div id="examDetail" style="display: none; width: 100%;">
         <h2 id="targetTitle">職務名稱</h2>
-        <div class="exam-card">
-          <h4>[ 各職務工作內容 ]</h4>
-          <div class="exam-content" id="content">內容</div>
-        </div>
         <div class="exam-grid">
+          <div class="exam-card job-content-card">
+            <h4>[ 各職務工作內容 ]</h4>
+            <div class="exam-content" id="content">內容</div>
+          </div>
           <div class="exam-card">
             <h4>[ 考題 1 ]</h4>
             <div class="exam-content" id="targetExam1">內容</div>
@@ -374,7 +346,7 @@
             <div class="exam-content" id="targetExam2">內容</div>
           </div>
         </div>
-        <div style="text-align: right;">
+        <div class="footer-action">
           <button class="btn-submit" id="startExamBtn">啟動正式評測</button>
         </div>
       </div>
@@ -389,6 +361,11 @@
         <li>所有流程最晚須於 17:00 前結束。</li>
       </ul>
     </footer>
+  </div>
+
+
+
+
   </main>
 
   <script>
@@ -407,7 +384,12 @@
     };
 
     function toggleMenu() {
-      document.getElementById('sidebar').classList.toggle('active');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      sidebar.classList.toggle('active');
+      if (window.innerWidth <= 992) {
+        overlay.classList.toggle('active');
+      }
     }
 
     document.querySelectorAll('.job-item').forEach(item => {
@@ -416,21 +398,25 @@
         document.querySelectorAll('.job-item').forEach(i => i.classList.remove('active'));
         this.classList.add('active');
 
-        if (window.innerWidth <= 992) { toggleMenu(); }
+        if (window.innerWidth <= 992) { 
+          document.getElementById('sidebar').classList.remove('active'); 
+          document.getElementById('overlay').classList.remove('active'); 
+        }
 
         const examDetail = document.getElementById('examDetail');
         const defaultMsg = document.getElementById('defaultMsg');
         defaultMsg.style.display = 'none';
         examDetail.style.display = 'block';
 
-        // 更新各個欄位資訊
         document.getElementById('targetTitle').innerText = this.getAttribute('data-title');
         document.getElementById('targetExam1').innerText = this.getAttribute('data-exam1');
         document.getElementById('targetExam2').innerText = this.getAttribute('data-exam2') || '無對應技術考核';
         
-        // 更新 [ 各職務工作內容 ] 區域
         const jobContent = this.getAttribute('data-content');
         document.getElementById('content').innerText = jobContent || '暫無說明';
+
+        // 點選後讓右側內容捲軸回到最上方
+        document.querySelector('.main-content').scrollTop = 0;
 
         examDetail.classList.remove('fade-in');
         void examDetail.offsetWidth; 
@@ -443,7 +429,6 @@
       if (activeJob) {
         const jobTitle = activeJob.getAttribute('data-title');
         const targetPage = jobPageMap[jobTitle];
-
         if (targetPage) {
           window.location.href = targetPage;
         } else {
