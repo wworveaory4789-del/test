@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>團隊工作回報統計系統 (含每日查詢)</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --success-color: #2ecc71;
+            --danger-color: #e74c3c;
+            --warning-color: #f1c40f;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Hiragino Sans GB", "Microsoft JhengHei", sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            color: var(--dark-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--dark-color);
+            border-bottom: 2px solid var(--light-color);
+            padding-bottom: 15px;
+        }
+
+        /* 區塊標題 */
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 25px 0 12px 0;
+            color: #334155;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 控制區樣式 */
+        .control-panel {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        input, select, button {
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background-color: #357abd;
+        }
+
+        button.btn-export {
+            background-color: #34495e;
+            margin-left: auto;
+        }
+
+        /* 每日查詢儀表板 */
+        .daily-dashboard {
+            background: #edf2f7;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid #cbd5e1;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .stat-badges {
+            display: flex;
+            gap: 10px;
+        }
+
+        .badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            color: white;
+        }
+        .badge-total { background-color: #718096; }
+        .badge-v { background-color: var(--success-color); }
+        .badge-x { background-color: var(--danger-color); }
+        .badge-vacation { background-color: #a0aec0; }
+
+        .daily-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 10px;
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .daily-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 10px;
+            border-bottom: 1px solid #edf2f7;
+            font-size: 14px;
+        }
+        .daily-item .name { font-weight: bold; }
+        .daily-item .status { font-weight: bold; }
+
+        /* 表格樣式 */
+        .table-responsive {
+            overflow-x: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            background: white;
+            min-width: 700px;
+        }
+
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 12px 10px;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #f8fafc;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        th:first-child, td:first-child {
+            position: sticky;
+            left: 0;
+            background: #f8fafc;
+            font-weight: bold;
+            z-index: 1;
+            min-width: 120px;
+        }
+        td:first-child {
+            background: white;
+        }
+
+        /* 狀態儲存格樣式 */
+        .status-cell {
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.1s;
+            user-select: none;
+        }
+        .status-cell:hover { background-color: #f1f5f9; }
+        .status-v { color: var(--success-color); background-color: #ecfdf5; }
+        .status-x { color: var(--danger-color); background-color: #fef2f2; }
+        .status-vacation { color: #7f8c8d; background-color: #f5f6fa; }
+
+        /* 總計區塊樣式 */
+        .summary-section {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            margin-top: 25px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 6px;
+            border-left: 4px solid var(--primary-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .summary-card.alert-card { border-left-color: var(--danger-color); }
+        .summary-card h4 { margin: 0 0 5px 0; font-size: 14px; color: #64748b; }
+        .summary-card p { margin: 0; font-size: 13px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>團隊工作回報統計系統</h1>
+
+    <div class="control-panel">
+        <div class="input-group">
+            <input type="text" id="memberInput" placeholder="輸入新成員 (例: 潘瑞明Reaper)">
+            <button onclick="addMember()">新增成員</button>
+        </div>
+        <div class="input-group">
+            <input type="date" id="dateInput">
+            <button onclick="addDate()">新增日期欄位</button>
+        </div>
+        <button class="btn-export" onclick="exportData()">導出 JSON 數據</button>
+    </div>
+
+    <div class="section-title">🔍 每日回報紀錄快速查詢</div>
+    <div class="daily-dashboard">
+        <div class="dashboard-header">
+            <div class="input-group">
+                <label for="dateSelect" style="font-weight: bold;">請選擇查詢日期：</label>
+                <select id="dateSelect" onchange="loadDailyReport()">
+                    </select>
+            </div>
+            <div class="stat-badges" id="dailyStats">
+                </div>
+        </div>
+        <div class="daily-list" id="dailyList">
+            </div>
+    </div>
+
+    <div class="section-title">📅 完整歷史回報矩陣總表 (可點擊格子修改)</div>
+    <div class="table-responsive">
+        <table id="reportTable">
+            <thead>
+                <tr id="headerRow">
+                    <th>姓名</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+
+    <div class="summary-section">
+        <div class="section-title" style="margin:0 0 15px 0;">📊 長期異常累積排行榜 (x 統計)</div>
+        <div class="summary-grid" id="summaryGrid"></div>
+    </div>
+</div>
+
+<script>
+    // 預設成員與日期
+    let members = [
+        "潘瑞明Reaper", "陳國瑋Wyclif", "劉建宏Ike", "黃家承Justin", 
+        "謝文育Wiliam", "張芷庭Naomi", "蘇宥榕Ryan", "王威凱Kyle", 
+        "許邵鈞Allen", "陳致銘Jordan", "周艾德Peter", "蘇智傑Jason", "彭唯致Mark"
+    ];
+    let dates = ["5/4", "5/5"];
+    let reportData = {};
+
+    // 初始化假資料做測試 (5/4 全過，5/5 蘇智傑請假，隨機塞一個異常作範例)
+    function initData() {
+        members.forEach(m => {
+            if (!reportData[m]) reportData[m] = {};
+            dates.forEach(d => {
+                if (m === "蘇智傑Jason" && d === "5/5") {
+                    reportData[m][d] = { status: '休', note: '' };
+                } else if (m === "蘇宥榕Ryan" && d === "5/4") {
+                    reportData[m][d] = { status: 'x', note: '沒回報午一結果' };
+                } else {
+                    reportData[m][d] = { status: 'v', note: '' };
+                }
+            });
+        });
+    }
+
+    // 重新更新下拉選單的日期
+    function updateDateSelect() {
+        const select = document.getElementById('dateSelect');
+        const currentSelected = select.value; // 保留當前選擇
+        
+        select.html = '';
+        let options = '';
+        dates.forEach(d => {
+            options += `<option value="${d}">${d} 回報紀錄</option>`;
+        });
+        select.innerHTML = options;
+        
+        if (dates.includes(currentSelected)) {
+            select.value = currentSelected;
+        } else {
+            select.value = dates[dates.length - 1]; // 預設選最新的一天
+        }
+    }
+
+    // 核心查詢功能：載入某個特定日期的所有人回報狀態
+    function loadDailyReport() {
+        const targetDate = document.getElementById('dateSelect').value;
+        const dailyList = document.getElementById('dailyList');
+        const dailyStats = document.getElementById('dailyStats');
+        
+        if (!targetDate) return;
+
+        dailyList.innerHTML = '';
+        let countV = 0, countX = 0, countVacation = 0, countNone = 0;
+
+        members.forEach(member => {
+            const cell = reportData[member]?.[targetDate] || { status: '', note: '' };
+            let statusText = '';
+            let color = '#2c3e50';
+
+            if (cell.status === 'v') {
+                statusText = '🟢 正常 (v)';
+                countV++;
+            } else if (cell.status === 'x') {
+                statusText = `🔴 異常：${cell.note || '未註明原因'}`;
+                countX++;
+                color = 'var(--danger-color)';
+            } else if (cell.status === '休') {
+                statusText = '🟡 請假 (休)';
+                countVacation++;
+                color = '#7f8c8d';
+            } else {
+                statusText = '⚪ 未填寫';
+                countNone++;
+            }
+
+            const item = document.createElement('div');
+            item.className = 'daily-item';
+            item.innerHTML = `
+                <span class="name">${member}</span>
+                <span class="status" style="color: ${color}">${statusText}</span>
+            `;
+            dailyList.appendChild(item);
+        });
+
+        // 計算到齊率與顯示標籤 (不把請假的人算在分母)
+        let activeMembers = members.length - countVacation;
+        let rate = activeMembers > 0 ? Math.round((countV / activeMembers) * 100) : 0;
+
+        dailyStats.innerHTML = `
+            <span class="badge badge-total">應到人數：${activeMembers}人 (到齊率 ${rate}%)</span>
+            <span class="badge badge-v" style="background-color:#2ecc71">正常：${countV}</span>
+            <span class="badge badge-x" style="background-color:#e74c3c">異常：${countX}</span>
+            <span class="badge badge-vacation">請假：${countVacation}</span>
+        `;
+    }
+
+    // 渲染歷史大表格
+    function renderTable() {
+        const headerRow = document.getElementById('headerRow');
+        const tableBody = document.getElementById('tableBody');
+
+        headerRow.innerHTML = '<th>姓名</th>';
+        dates.forEach(date => { headerRow.innerHTML += `<th>${date}</th>`; });
+
+        tableBody.innerHTML = '';
+        members.forEach(member => {
+            let rowHtml = `<tr><td>${member}</td>`;
+            dates.forEach(date => {
+                const cellData = reportData[member]?.[date] || { status: '', note: '' };
+                let cellClass = 'status-cell';
+
+                if (cellData.status === 'v') cellClass += ' status-v';
+                if (cellData.status === 'x') cellClass += ' status-x';
+                if (cellData.status === '休') cellClass += ' status-vacation';
+
+                let displayText = cellData.note ? `x ${cellData.note}` : cellData.status;
+                rowHtml += `<td class="${cellClass}" onclick="handleCellClick('${member}', '${date}')">${displayText}</td>`;
+            });
+            rowHtml += '</tr>';
+            tableBody.innerHTML += rowHtml;
+        });
+
+        updateDateSelect();
+        loadDailyReport();
+        calculateSummary();
+    }
+
+    // 點擊表格修改資料
+    function handleCellClick(member, date) {
+        if (!reportData[member]) reportData[member] = {};
+        if (!reportData[member][date]) reportData[member][date] = { status: '', note: '' };
+
+        let currentStatus = reportData[member][date].status;
+
+        if (currentStatus === 'v') {
+            let note = prompt(`請輸入 ${member} 在 ${date} 的異常原因：`, "沒回報午一結果");
+            if (note === null) return;
+            reportData[member][date].status = 'x';
+            reportData[member][date].note = note;
+        } else if (currentStatus === 'x') {
+            reportData[member][date].status = '休';
+            reportData[member][date].note = '';
+        } else if (currentStatus === '休') {
+            reportData[member][date].status = '';
+            reportData[member][date].note = '';
+        } else {
+            reportData[member][date].status = 'v';
+            reportData[member][date].note = '';
+        }
+        renderTable();
+    }
+
+    // 新增成員
+    function addMember() {
+        const input = document.getElementById('memberInput');
+        const name = input.value.trim();
+        if (name && !members.includes(name)) {
+            members.push(name);
+            reportData[name] = {};
+            dates.forEach(d => reportData[name][d] = { status: 'v', note: '' });
+            input.value = '';
+            renderTable();
+        }
+    }
+
+    // 新增日期
+    function addDate() {
+        const input = document.getElementById('dateInput');
+        if (input.value) {
+            const dateObj = new Date(input.value);
+            const formattedDate = `${dateObj.getMonth() + 1}/${dateObj.getDate()}`;
+            if (!dates.includes(formattedDate)) {
+                dates.push(formattedDate);
+                members.forEach(m => {
+                    if (!reportData[m]) reportData[m] = {};
+                    reportData[m][formattedDate] = { status: 'v', note: '' };
+                });
+                renderTable();
+            }
+        }
+    }
+
+    // 計算長期累積排行
+    function calculateSummary() {
+        const summaryGrid = document.getElementById('summaryGrid');
+        summaryGrid.innerHTML = '';
+        members.forEach(member => {
+            let xCount = 0;
+            let details = [];
+            dates.forEach(date => {
+                const cell = reportData[member]?.[date];
+                if (cell?.status === 'x') { xCount++; details.push(`${date}(${cell.note || '未填'})`); }
+            });
+            if (xCount > 0) {
+                const card = document.createElement('div');
+                card.className = 'summary-card alert-card';
+                card.innerHTML = `<h4>${member}</h4><p>❌ 累計異常：<strong>${xCount} 次</strong></p><p style="color:#e74c3c; font-size:12px; margin-top:5px;">明細：${details.join(', ')}</p>`;
+                summaryGrid.appendChild(card);
+            }
+        });
+        if (summaryGrid.innerHTML === '') {
+            summaryGrid.innerHTML = '<p style="color:var(--success-color); grid-column:1/-1; text-align:center;">🎉 全員目前完美保持無異常紀錄！</p>';
+        }
+    }
+
+    // 導出 JSON
+    function exportData() {
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({members, dates, reportData}, null, 2));
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute("download", `回報數據_${new Date().toISOString().slice(0,10)}.json`);
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+    }
+
+    document.getElementById('dateInput').value = new Date().toISOString().slice(0, 10);
+    initData();
+    renderTable();
+</script>
+
+</body>
+</html>
