@@ -302,10 +302,10 @@
        data-content="1.資訊環境架構安全規劃&#10;2.資安事件追蹤與分析，反應處理及調整&#10;3.機房維運管理、網路管理、資訊專案推動執行&#10;4.負責維護會員個資安全與電子發票傳輸合規性，應對年度資安稽核。&#10;5.溝通協調解決維運與資安安全事件，配合執行ISO9000、27001、ESG、個資法運作及驗證稽核">08 維運及資安主管</a>
 
     <div class="category-title">03 專案管理 / 分析</div>
-    <a class="job-item" data-title="資訊分析專員/主管" data-exam1="通識測驗" data-exam2="資訊分析專員面試測試題"
-       data-content="1.蒐集並整理營運相關資料（銷售、會員、交易、系統紀錄等）&#10;2.使用報表工具（MicroStrategy, MSTR）擷取系統資料，進行資料整理與分析，提供管理決策參考&#10;3.分析營運數據趨勢，發現異常或潛在問題並提出建議&#10;4.協助各部門進行數據需求訪談與指標定義，將實際問題轉化為可分析之需求文件或可開發文件&#10;5.進行資料清理、轉換與彙整，提高資料品質&#10;6.視需要製作視覺化圖表或簡報報告&#10;7.協助建立數據管理與報表標準化流程&#10;8.協助系統測試（UAT）、資料驗證與問題追蹤&#10;9.主管交辦之其他數據分析相關事項">09 資訊分析專員/主管</a>
+    <a class="job-item" data-title="資訊分析主管/專員" data-exam1="通識測驗" data-exam2="資訊分析專員面試測試題" data-exam3="建制指引分析"
+       data-content="1.蒐集並整理營運相關資料（銷售、會員、交易、系統紀錄等）&#10;2.使用報表工具（MicroStrategy, MSTR）擷取系統資料，進行資料整理與分析，提供管理決策參考&#10;3.分析營運數據趨勢，發現異常或潛在問題並提出建議&#10;4.協助各部門進行數據需求訪談與指標定義，將實際問題轉化為可分析之需求文件或可開發文件&#10;5.進行資料清理、轉換與彙整，提高資料品質&#10;6.視需要製作視覺化圖表或簡報報告&#10;7.協助建立數據管理與報表標準化流程&#10;8.協助系統測試（UAT）、資料驗證與問題追蹤&#10;9.主管交辦之其他數據分析相關事項">09 資訊分析主管/專員</a>
     
-    <a class="job-item" data-title="資訊帳務處理專員/主管" data-exam1="建置指引分析" data-exam2="庫存管理與系統診斷考核"
+    <a class="job-item" data-title="資訊帳務處理主管/專員" data-exam1="建置指引分析" data-exam2="庫存管理與系統診斷考核"
        data-content="1.負責公司內部資訊系統相關帳務資料之日常處理與核對&#10;2.協助 POS、ERP 或相關營運系統之帳務資料匯出、整理與異常比對，將其轉化為需求文件、可開發文件&#10;3.進行交易資料檢核，確認金額、筆數與系統紀錄一致&#10;4.協助處理帳務異常案件，與資訊單位或窗口聯繫釐清問題&#10;5.定期產出帳務相關報表，提供財務或管理單位使用&#10;6.協助維護帳務作業流程文件與操作SOP&#10;7.支援電子發票、金流或帳務系統相關資料整理與查詢作業&#10;8.協助系統測試（UAT）、資料驗證與問題追蹤&#10;9.主管交辦之其他資料彙整與行政支援事項&#10;10.確保系統產出的財務報表與實際金流 100% 吻合，防範系統邏輯漏洞導致的財務損失。">10 資訊帳務處理專員</a>
     
     <a class="job-item" data-title="資訊軟體專案 PM" data-exam1="建置指引分析" data-exam2="庫存管理與系統診斷考核"
@@ -345,6 +345,10 @@
             <h4>[ 考題 2 ]</h4>
             <div class="exam-content" id="targetExam2">內容</div>
           </div>
+          <div class="exam-card">
+            <h4>[ 考題 3 ]</h4>
+            <div class="exam-content" id="targetExam3">內容</div>
+          </div>
         </div>
         <div class="footer-action">
           <button class="btn-submit" id="startExamBtn">啟動正式評測</button>
@@ -378,7 +382,7 @@
       "資訊維運人員 (桃園機場)": "MIS_Airport.html",
       "資深維運 MIS (組長或課長)": "SrMIS.html",
       "維運及資安主管": "SrMIS.html",
-      "資訊分析專員/主管": "Analyst.html",
+      "資訊分析主管/專員": "Analyst.html",
       "資訊帳務處理專員/主管": "Accounting.html",
       "資訊軟體專案 PM": "PM.html"
     };
@@ -410,8 +414,10 @@
 
         document.getElementById('targetTitle').innerText = this.getAttribute('data-title');
         document.getElementById('targetExam1').innerText = this.getAttribute('data-exam1');
-        document.getElementById('targetExam2').innerText = this.getAttribute('data-exam2') || '無對應技術考核';
-        
+        document.getElementById('targetExam2').innerText = this.getAttribute('data-exam2') || '';
+        document.getElementById('targetExam3').innerText = this.getAttribute('data-exam3') || '';
+
+
         const jobContent = this.getAttribute('data-content');
         document.getElementById('content').innerText = jobContent || '暫無說明';
 
