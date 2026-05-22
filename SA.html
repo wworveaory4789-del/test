@@ -296,10 +296,10 @@
           <span>01.通識測驗</span>
         </div>
         <div class="exam-item" onclick="switchTab('sa1-exam', this)">
-          <span>02.Java基礎考題</span>
+          <span>02.資深軟體開發面試測驗題</span>
         </div>
         <div class="exam-item" onclick="switchTab('sa2-exam', this)">
-          <span>03.Java進階考題</span>
+          <span>03.資料庫測試題</span>
         </div>
       </div>
     </div>
@@ -360,11 +360,11 @@
           <li>一個跨平台的應用系統，如何確保資料同步和一致性？</li>
         </ol>
       </div>
-
+      
       <div class="section-header">● 溝通與問題處理能力</div>
       <div class="card">
         <ol>
-          <li>遇到內部系統 and 第三方系統整合失敗時，步驟該如何處理？</li>
+          <li>遇到內部系統和第三方系統整合失敗時，步驟該如何處理？</li>
           <li>系統在高峰時段用戶連線增高，如何進行「短期調整」與「長期改善」效能優化？</li>
           <li>如何分配任務以提高團隊效率，並確保交付品質是符合客戶需求？</li>
         </ol>
@@ -372,127 +372,128 @@
     </div>
 
     <div id="sa2-exam" class="tab-content">
-      <div class="section-header">三、 專業選擇題與問答</div>
-      
       <div class="card">
-        <p>1. 在考慮資料庫的需求時,除了使用者的需求外,資料庫的完整、安全等也要考慮。若某公司的總公司在台北,分公司在高雄,最適當的備份機制是哪一種?</p>
-        <ul style="list-style-type: none;">
-          <li>(A) 線上備份(On-line backup)</li>
-          <li>(B) 離線備份(Off-line backup)</li>
-          <li>(C) 漸近備份(Incremental backup)</li>
-          <li>(D) 異地備份(Off-site backup)</li>
-        </ul>
-      </div>
-      
-      <div class="card">
-        <p>2. 請參閱以下作答:<br>
-        在客戶基本資料表(Customer)使用一段時間後，資料表中已有一大堆客戶資料。這時我們發現為了加快查詢速度，要對電話欄位(tel_no) 建立索引，假設電話欄位只有一個，且電話號碼不會重覆，我們執行SQL指令如下：<br>
-        <code>CREATE UNIQUE INDEX tel_no_idx ON Customer (tel_no);</code><br>
-        下列敘述何者正確?</p>
-        <ul style="list-style-type: none;">
-          <li>(A) 一定可以成功建立索引</li>
-          <li>(B) 如果所有客戶都有電話號碼,且號碼不重覆,就可以建立索引</li>
-        </ul>
-        <img src="./考題/SA/SA1.png" alt="考題附圖1" class="exam-db-img">
-        <ul style="list-style-type: none;">
-          <li>(C)所有客戶若都有電話號碼,則可以建立索引</li>
-          <li>(D)一定無法建立索引</li>
-        </ul>
-      </div>
-      
-      <div class="card">
-        <p>3. 請參閱附圖作答：<br>
-        參考下列實體關係圖，哪項敘述是錯誤的？</p>
-        <ul style="list-style-type: none;">
-          <li>(A)病患一定有醫師診治</li>
-          <li>(B)一位醫師可以隸屬於不同的醫院</li>
-          <li>(C)病患一定至某家醫院就診</li>
-          <li>(D)醫院不一定會擁有病床</li>
-        </ul>
-      </div>
-      
-      <div class="card">
-        <p>4. 身為一個資料庫管理師(DBA)，要維護資料庫的可用性，經常要做的維護動作，以下敘述何者有誤？</p>
-        <ul style="list-style-type: none;">
-          <li>(A)檢查應用程式，看是否有陷(Bug)出現</li>
-          <li>(B)檢查系統日誌(Log file)，看是否有異常狀況發生</li>
-          <li>(C)檢查各資料表之資料量的成長狀況，及整體資料庫的磁碟使用空間</li>
-          <li>(D)定期查看各資料表之索引(Index)的使用狀況</li>
-        </ul>
-      </div>
-      
-      <div class="card">
-        <p>5. 請參閱附圖作答：<br>
-        如果將下面的實體關係圖轉換成二個資料表，其結果為何?</p>
-        <img src="./考題/SA/SA2.png" alt="考題附圖2" class="exam-db-img">
-        <ul style="list-style-type: none;">
-          <li>(A)病患(身分證號,姓名)，醫師(代號,職稱,姓名,診治)</li>
-          <li>(B)病患(身分證號,姓名)，醫師(代號,職稱,姓名)</li>
-          <li>(C)病患(身分證號,姓名,診治)，醫師(代號,職稱,姓名)</li>
-          <li>(D)病患(身分證號,姓名,就診)，醫師(代號,職稱,姓名)</li>
-        </ul>
-      </div>
-      
-      <div class="card">
-        <p>6. 請參閱附圖作答：</p>
-        <img src="./考題/SA/SA3.png" alt="考題附圖3" class="exam-db-img">
-        <ul style="list-style-type: none;">
-          <li>(A)資料表 Student 的主鍵(Primary key)是 Sid</li>
-          <li>(B) 資料表 Student 的外鍵(Foreign key)是 DeptNo</li>
-          <li>(C)Sld 欄位必須要有值</li>
-          <li>(D)SName 欄位的值不可重覆</li>
-        </ul>
-      </div>
-      
-      <div class="card">
-        <p>7. 下列敘述何者是不正確的？</p>
-        <img src="./考題/SA/SA4.png" alt="考題附圖4" class="exam-db-img">
-        <ul style="list-style-type: none;">
-          <li>(A)一個會員的介紹人必定也是會員</li>
-          <li>(B)一個商品可以有多個創作者</li>
-          <li>(C)購物車實體型態不可以單獨存在</li>
-          <li>(D)一個交易可以有多種付款方式</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <p>8. 在考慮資料庫安全時，可以採取一些實際作為來防止威脅，下列敘述何者不宜？</p>
-        <ul style="list-style-type: none;">
-          <li>(A) 設定資料庫內各物件的存取權限</li>
-          <li>(B) 只設定一組管理者(Administrator)帳號密碼</li>
-          <li>(C) 執行流程控制(Flow control)</li>
-          <li>(D) 啟動日誌功能,記載各使用者的存取記錄</li>
-        </ul>
-      </div>
-      
-      <div class="card">
-        <p>9. 請問下列的SQL 指令是何意義?<br>
-        <code>GRANT SELECT ON Product TO user4 WITH GRANT OPTION;</code></p>
-        <ul style="list-style-type: none;">
-          <li>(A)授與 user4 有查詢資料表 Product 的權力，且可將此權限再授與他人</li>
-          <li>(B) 授與 user4 有查詢資料表 Product 的權力，但不可將此權限再授與他人</li>
-          <li>(C)授與 user4有查詢、更改資料表 Product的權力，且可將此權限再授與他人</li>
-          <li>(D)授與 user4 有查詢、更改資料表 Product的權力，但不可將此權限再授與他人</li>
-        </ul>
-      </div>
-      
-      <div class="card">
-        <p>10. 請參閱附圖作答(複選題)</p>
-        <img src="./考題/SA/SA5.png" alt="考題附圖5" class="exam-db-img">
-        <ul style="list-style-type: none;">
-          <li>(A) 成績單1={學號，地址，郵遞區號，學科代碼} ，成績單2={學科代碼，各科成績}</li>
-          <li>(B) 成績單1={學號，地址，郵遞區號}，成績單2={學號，學科代碼，各科成績}</li>
-          <li>(C) 成績單1={學號，地址}，地址_區號={地址，郵遞區號}，成績單2={學號，學科代碼，各科成績}</li>
-          <li>(D) 成績單1={學號，地址，郵遞區號，學科代碼}，地址_區號={地址，郵遞區號}，成績單2={學科代碼，各科成績}</li>
-        </ul>
-      </div>
-      
-      <div class="card">
-        <p>11. 如何在資料量大的資料表內搜尋速度？(語法或調整 Table 方式皆可)</p>
-      </div>
-      
-      <div class="card">
-        <p>12. 如何在資料庫增強資料防護符合資安法規規範？</p>
+        <ol>
+          <li>
+            <p>在考慮資料庫的需求時,除了使用者的需求外,資料庫的完整、安全等也要考慮。若某公司的總公司在台北,分公司在高雄,最適當的備份機制是哪一種?</p>
+            <ul style="list-style-type: none; padding-left: 0;">
+              <li>(A) 線上備份(On-line backup)</li>
+              <li>(B) 離線備份(Off-line backup)</li>
+              <li>(C) 漸近備份(Incremental backup)</li>
+              <li>(D) 異地備份(Off-site backup)</li>
+            </ul>
+          </li>
+          
+          <li>
+            <p>請參閱以下作答:</p>
+            <p>在客戶基本資料表(Customer)使用一段時間後，資料表中已有一大堆客戶資料。這時我們發現為了加快查詢速度，要對電話欄位(tel_no) 建立索引，假設電話欄位只有一個，且電話號碼不會重覆，我們執行SQL指令如下：</p>
+            <p><code>CREATE UNIQUE INDEX tel_no_idx ON Customer (tel_no):</code></p>
+            <p>下列敘述何者正確?</p>
+           
+            <ul style="list-style-type: none; padding-left: 0;">
+              <li>(A) 一定可以成功建立索引</li>
+              <li>(B) 如果所有客戶都有電話號碼,且號碼不重覆,就可以建立索引</li>
+              <li>(C) 所有客戶若都有電話號碼,則可以建立索引</li>
+              <li>(D) 一定無法建立索引</li>
+            </ul>
+          </li>
+          
+          <li>
+            <p>3.請參閱附圖作答：</p>
+            <p>參考下列實體關係圖，哪項敘述是錯誤的？</p>
+            <img src="./考題/SA/SA1.png" alt="SA1 考題圖" class="exam-db-img">
+            <ul style="list-style-type: none; padding-left: 0;">
+              <li>(A)病患一定有醫師診治</li>
+              <li>(B)一位醫師可以隸屬於不同的醫院</li>
+              <li>(C)病患一定至某家醫院就診</li>
+              <li>(D)醫院不一定會擁有病床</li>
+            </ul>
+          </li>
+          
+          <li>
+            <p>身為一個資料庫管理師(DBA)，要維護資料庫的可用性，經常要做的維護動作，以下敘述何者有誤？</p>
+            <ul style="list-style-type: none; padding-left: 0;">
+              <li>(A)檢查應用程式，看是否有陷(Bug)出現</li>
+              <li>(B)檢查系統日誌(Log file)，看是否有異常狀況發生</li>
+              <li>(C)檢查各資料表之資料量的成長狀況，及整體資料庫的磁碟使用空間</li>
+              <li>(D)定期查看各資料表之索引(Index)的使用狀況</li>
+            </ul>
+          </li>
+          
+          <li>
+            <p>請參閱附圖作答：</p>
+            <p>如果將下面的實體關係圖轉換成二個資料表，其結果為何?</p>
+            <img src="./考題/SA/SA2.png" alt="SA2 考題圖" class="exam-db-img">
+            <ul style="list-style-type: none; padding-left: 0;">
+              <li>(A)病患(身分證號,姓名)，醫師(代號,職稱,姓名,診治)</li>
+              <li>(B)病患(身分證號,姓名)，醫師(代號,職稱,姓名)</li>
+              <li>(C)病患(身分證號,姓名,診治)，醫師(代號,職稱,姓名)</li>
+              <li>(D)病患(身分證號,姓名,就診)，醫師(代號,職稱,姓名)</li>
+            </ul>
+          </li>
+          
+          <li>
+            <p>請參閱附圖作答：</p>
+            <img src="./考題/SA/SA3.png" alt="SA3 考題圖" class="exam-db-img">
+            <ul style="list-style-type: none; padding-left: 0;">
+              <li>(A)資料表 Student 的主鍵(Primary key)是 Sid</li>
+              <li>(B) 資料表 Student 的外鍵(Foreign key)是 DeptNo</li>
+              <li>(C)Sld 欄位必須要有值</li>
+              <li>(D)SName 欄位的值不可重覆</li>
+            </ul>
+          </li>
+          
+          <li>
+            <p>下列敘述何者是不正確的？</p>
+            <img src="./考題/SA/SA4.png" alt="SA4 考題圖" class="exam-db-img">
+            <ul style="list-style-type: none; padding-left: 0;">
+              <li>(A)一個會員的介紹人必定也是會員</li>
+              <li>(B)一個商品可以有多個創作者</li>
+              <li>(C)購物車實體型態不可以單獨存在</li>
+              <li>(D)一個交易可以有多種付款方式</li>
+            </ul>
+          </li>
+          
+          <li>
+            <p>在考慮資料庫安全時，可以採取一些實際作為來防止威脅，下列敘述何者不宜？</p>
+            <ul style="list-style-type: none; padding-left: 0;">
+              <li>(A) 設定資料庫內各物件的存取權限</li>
+              <li>(B) 只設定一組管理者(Administrator)帳號密碼</li>
+              <li>(C) 執行流程控制(Flow control)</li>
+              <li>(D) 啟動日誌功能,記載各使用者的存取記錄</li>
+            </ul>
+          </li>
+          
+          <li>
+            <p>請問下列的SQL 指令是何意義?</p>
+            <p><code>GRANT SELECT ON Product TO user4 WITH GRANT OPTION;</code></p>
+            <ul style="list-style-type: none; padding-left: 0;">
+              <li>(A)授與 user4 有查詢資料表 Product 的權力，且可將此權限再授與他人</li>
+              <li>(B) 授與 user4 有查詢資料表 Product 的權力，但不可將此權限再授與他人</li>
+              <li>(C)授與 user4有查詢、更改資料表 Product的權力，且可將此權限再授與他人</li>
+              <li>(D)授與 user4 有查詢、更改資料表 Product的權力，但不可將此權限再授與他人</li>
+            </ul>
+          </li>
+          
+          <li>
+            <p>請參閱附圖作答(複選題)</p>
+            <img src="./考題/SA/SA5.png" alt="SA5 考題圖" class="exam-db-img">
+            <ul style="list-style-type: none; padding-left: 0;">
+              <li>(A) 成績單1={學號，地址，郵遞區號，學科代碼} ，成績單2={學科代碼，各科成績}</li>
+              <li>(B) 成績單1={學號，地址，郵遞區號}，成績單2={學號，學科代碼，各科成績}</li>
+              <li>(C) 成績單1={學號，地址}，地址_區號={地址，郵遞區號}，成績單2={學號，學科代碼，各科成績}</li>
+              <li>(D) 成績單1={學號，地址，郵遞區號，學科代碼}，地址_區號={地址，郵遞區號}，成績單2={學科代碼，各科成績}</li>
+            </ul>
+          </li>
+          
+          <li>
+            <p>如何在資料量大的資料表內搜尋速度？(語法或調整 Table 方式皆可)</p>
+          </li>
+          
+          <li>
+            <p>如何在資料庫增強資料防護符合資安法規規範？</p>
+          </li>
+        </ol>
       </div>
     </div>
 
