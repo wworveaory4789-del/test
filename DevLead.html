@@ -8,9 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=PingFang+TC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=PingFang+TC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -89,7 +87,7 @@
       background: rgba(106, 27, 154, 0.05);
       font-weight: bold;
       color: var(--primary-color);
-      border-color: #7f00d4 ;
+      border-color: #7f00d4;
     }
 
     /* 主內容區 */
@@ -156,7 +154,7 @@
       margin: 10px 0 15px 0;
       border-radius: 8px;
       border: 1px solid var(--glass-border);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
     }
 
     .notice-card {
@@ -288,15 +286,14 @@
     </div>
 
     <div style="margin-top: 20px;">
-      <div
-        style="font-size: 12px; font-weight: bold; color: var(--text-sub); margin-bottom: 10px; font-family: 'Orbitron';">
+      <div style="font-size: 12px; font-weight: bold; color: var(--text-sub); margin-bottom: 10px; font-family: 'Orbitron';">
         EXAM LIST</div>
       <div class="exam-list">
         <div class="exam-item active" onclick="switchTab('general-exam', this)">
           <span>01.通識測驗</span>
         </div>
         <div class="exam-item" onclick="switchTab('java-exam', this)">
-          <span>02.Java基礎考題</span>
+          <span>02.資深軟體開發面試測試題</span>
         </div>
         <div class="exam-item" onclick="switchTab('javaex-exam', this)">
           <span>03.Java進階考題</span>
@@ -305,8 +302,7 @@
     </div>
 
     <div style="margin-top: auto;">
-      <div
-        style="padding: 15px; background: white; border-radius: 10px; border: 1px solid var(--glass-border); margin-bottom: 15px; text-align: center;">
+      <div style="padding: 15px; background: white; border-radius: 10px; border: 1px solid var(--glass-border); margin-bottom: 15px; text-align: center;">
         <div style="font-size: 11px; color: var(--text-sub);">有問題請撥打分機</div>
         <div style="font-family: Orbitron; font-size: 20px; font-weight: 900; color: var(--primary-color);">#780</div>
       </div>
@@ -350,121 +346,26 @@
     </div>
 
     <div id="java-exam" class="tab-content">
-      <div class="section-title">01. 考試目的</div>
-      <div class="content-box">
-        <p style="margin:0; line-height: 1.6; font-size: 14px;">
-          本測驗旨在評估考生對於程式設計邏輯、物件導向結構化設計能力、以及可維護性與輸出格式清晰度之掌握。
-        </p>
-      </div>
-
-      <div class="section-title">02. 題目說明</div>
-      <div class="content-box">
-        <div class="info-card-group">
-          <div class="info-card">
-            <h4>登入密碼</h4>
-            <p>login@12371287</p>
-          </div>
-          <div class="info-card">
-            <h4>連線密碼</h4>
-            <p>P@ssw0rd</p>
-          </div>
-        </div>
-        <p style="margin-bottom: 15px; font-size: 14px; line-height: 1.6;">
-          請以 Java 撰寫一套簡易 POS（銷售系統）計算邏輯，依據題目要求計算各商品小計、會員折扣、小計後滿額折抵與最終應收金額，並以格式化輸出顯示結果。
-        </p>
-        <div style="font-size: 13px; color: var(--primary-color); font-weight: bold;">評核重點：</div>
-        <ul style="font-size: 13px; line-height: 1.8; color: var(--text-sub); margin: 5px 0 15px 0;">
-          <li>程式邏輯：小計前折扣、滿額後折抵邏輯順序正確。</li>
-          <li>程式架構：有良好結構化（例如用 class 封裝商品）。</li>
-          <li>可維護性：折扣規則易於修改（非寫死在多處）。</li>
-          <li>輸出清晰度：輸出明確、格式對齊、易於閱讀。</li>
+      <div class="section-header">資深軟體開發面試測試題</div>
+      
+      <div class="card">
+        <span class="sub-title">● 系統分析與設計能力</span>
+        <ul>
+          <li>企業希望建立一個 POS 系統，請描述該系統的流程與核心架構。</li>
+          <li>設計一個開發時間表，涵蓋需求說明、架構圖、DFD、開發、測試與上線。</li>
+          <li>規劃一套使用 10 年以上系統如何評估使用的語言與工具，請說明原因？</li>
+          <li>呈上一套 POS 系統上線後，針對企業營運，可以橫向擴充哪些系統發展促進發展增加公司營收？</li>
+          <li>一個跨平台的應用系統，如何確保資料同步和一致性？</li>
         </ul>
-
-        <div style="font-size: 13px; color: var(--primary-color); font-weight: bold;">商品主檔列表：</div>
-        <table>
-          <thead>
-            <tr>
-              <th>品號</th>
-              <th>品名</th>
-              <th>單價</th>
-              <th>數量</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>A001</td>
-              <td>酒類</td>
-              <td>900</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>A002</td>
-              <td>酒類</td>
-              <td>1200</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>B001</td>
-              <td>鳳梨酥</td>
-              <td>360</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>B002</td>
-              <td>台產</td>
-              <td>350</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>C001</td>
-              <td>伴手禮</td>
-              <td>600</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>C002</td>
-              <td>巧克力</td>
-              <td>120</td>
-              <td>1</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
 
-      <div class="grid-container">
-        <div>
-          <div class="section-title">03. 計算規則</div>
-          <div class="content-box">
-            <ul style="font-size: 13px; line-height: 2; padding-left: 20px; margin: 0;">
-              <li><strong>基本銷售計算：</strong>每筆交易包含多筆商品資料。計算每項商品小計（單價 × 數量），再加總為銷售金額。</li>
-              <li><strong>會員折扣（小計前活動）：</strong>若顧客為會員，享有 <span style="color: var(--danger-color); font-weight: bold;">95
-                  折</span>（商品單價 × 0.95 再計入小計）。</li>
-              <li><strong>滿額折抵（小計後活動）：</strong>
-                <br>• 若總金額達到 1000 元，折抵 100 元。
-                <br>• 若總金額達到 2000 元，折抵 200 元。
-                <br>• 依照等比例級距，依此類推。若未達門檻，無折抵。
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="right-sidebar">
-          <div class="section-title">04. 輸出要求</div>
-          <div class="code-output-box">
-            <div style="color: #6a9955; margin-bottom: 8px;">//請輸出以下購買商品明細之 JAVA 程式碼結果：</div>
-            <div style="font-size: 11px;">
-              A001 酒類 (900) x 2<br>
-              B002 台產 (350) x 10<br>
-              C003 巧克力 (120) x 3
-            </div>
-            <div style="margin-top: 12px; border-top: 1px solid #444; padding-top: 8px; color: #ce9178;">
-              需包含：<br>
-              • 會員折扣後金額<br>
-              • 滿額折抵金額<br>
-              • 最終應收金額
-            </div>
-          </div>
-        </div>
+      <div class="card">
+        <span class="sub-title">● 溝通與問題處理能力</span>
+        <ul>
+          <li>遇到內部系統和第三方系統整合失敗時，步驟該如何處理？</li>
+          <li>系統在高峰時段用戶連線增高，如何進行「短期調整」與「長期改善」效能優化？</li>
+          <li>如何分配任務以提高團隊效率，並確保交付品質是符合客戶需求？</li>
+        </ul>
       </div>
     </div>
 
@@ -501,7 +402,7 @@
           <img src="./考題/Java軟體工程師/03.Java進階考題/Java進階表三.png" alt="im_item_category" class="exam-db-img">
           
           <p style="font-size: 13.5px; margin: 15px 0 5px 0; font-weight: bold; color: var(--primary-color);">im_item_price 商品價格清單(存放商品每次異動的價格，若有兩筆以上符合的啟用價格，則以最新的啟用日(begin_date)為主)</p>
-          <img src="./考題/Java軟體工程師/03.Java進階考題/Java進階表四.png" alt="im_item_price" class="exam-db-img">
+          <img src="./考題/Java軟體工程師/03.Java進階考題/Java進階表 four.png" alt="im_item_price" class="exam-db-img">
         </div>
 
         <div style="margin-top: 20px; border-top: 1px dashed var(--glass-border); padding-top: 15px;">
@@ -520,17 +421,21 @@
         <div class="card" style="background: white; border-top: 3px solid var(--accent-color); padding: 15px; margin-bottom: 20px;">
           <span class="sub-title" style="font-size: 14px;">情境敘述：</span>
           <p style="font-size: 13.5px; line-height: 1.6; margin: 0;">
-            2025 年 10 月 30 日下午，一位旅客於桃園機場免稅店結帳，該旅客為公司會員並享有酒類商品 95 折優惠。本次購買清單如下：<br>
-            香水類商品共 3 瓶<br><br>
-            化妝品類商品共 2 件<br><br>
-            酒類商品共 2 瓶
+            2025 年 10 月 30 日下午，一位旅客於桃園機場免稅店結帳，該旅客為公司會員並享有酒類商品 95 折優惠。本次購買清單如下：
           </p>
+          <ul style="margin-top: 10px;">
+            <li>香水類商品共 3 瓶</li>
+            <li>化妝品類商品共 2 件</li>
+            <li>酒類商品共 2 瓶</li>
+          </ul>
         </div>
 
         <div style="font-size: 14px; line-height: 1.6; margin-bottom: 25px;">
-          <strong>請以 JDBC 方式 連線資料庫，讀取：</strong><br>
-          第一題中的「活動主檔資料」<br><br>
-          第二題中的「商品主檔資料」<br><br>
+          <strong>請以 JDBC 方式 連線資料庫，讀取：</strong>
+          <ul style="margin-top: 8px;">
+            <li>第一題中的「活動主檔資料」</li>
+            <li>第二題中的「商品主檔資料」</li>
+          </ul>
           並根據活動條件與商品資料，設計一套「滿額贈促銷計算程式架構」，完成促銷金額的計算。
         </div>
 
@@ -547,25 +452,36 @@
           
           <div style="margin-bottom: 15px; padding-left: 10px; border-left: 3px solid var(--primary-color);">
             <strong style="font-size: 14px; display: block; margin-bottom: 4px;">A.依據各項商品判斷會員身份與優惠</strong>
-            <span style="font-size: 13.5px; color: var(--text-main);">若商品為「酒類」則適用會員 95 折<br><br>其他品項不享會員折扣</span>
+            <ul style="margin-top: 5px; margin-bottom: 0;">
+              <li style="font-size: 13.5px; color: var(--text-main); margin-bottom: 0;">若商品為「酒類」則適用會員 95 折</li>
+              <li style="font-size: 13.5px; color: var(--text-main); margin-bottom: 0;">其他品項不享會員折扣</li>
+            </ul>
           </div>
 
           <div style="margin-bottom: 15px; padding-left: 10px; border-left: 3px solid var(--primary-color);">
             <strong style="font-size: 14px; display: block; margin-bottom: 4px;">B. 帶入活動清單並判斷有效活動</strong>
-            <span style="font-size: 13.5px; color: var(--text-main);">依活動主檔篩選「當日有效」的活動（2025/10/30）<br><br>根據活動型態（折扣／折讓）套用至符合的商品大類<br><br>每項活動僅可使用一次（不可重複折抵）</span>
+            <ul style="margin-top: 5px; margin-bottom: 0;">
+              <li style="font-size: 13.5px; color: var(--text-main); margin-bottom: 0;">依活動主檔篩選「當日有效」的活動（2025/10/30）</li>
+              <li style="font-size: 13.5px; color: var(--text-main); margin-bottom: 0;">根據活動型態（折扣／折讓）套用至符合的商品大類</li>
+              <li style="font-size: 13.5px; color: var(--text-main); margin-bottom: 0;">每項活動僅可使用一次（不可重複折抵）</li>
+            </ul>
           </div>
 
           <div style="margin-bottom: 15px; padding-left: 10px; border-left: 3px solid var(--primary-color);">
             <strong style="font-size: 14px; display: block; margin-bottom: 4px;">C. 攤提折抵與最終金額輸出</strong>
-            <span style="font-size: 13.5px; color: var(--text-main);">若多項商品參與同一活動，需依各品項金額比例攤提折抵金額<br><br>折扣後金額需四捨五入至整數<br><br>輸出內容需包含：<br><br>原價金額<br><br>折扣或折讓金額<br><br>攤提後最終應付金額</span>
+            <ul style="margin-top: 5px; margin-bottom: 0;">
+              <li style="font-size: 13.5px; color: var(--text-main);">若多項商品參與同一活動，需依各品項金額比例攤提折抵金額</li>
+              <li style="font-size: 13.5px; color: var(--text-main);">折扣後金額需四捨五入至整數</li>
+              <li style="font-size: 13.5px; color: var(--text-main); margin-bottom: 0;">輸出內容需包含：原價金額、折扣或折讓金額、攤提後最終應付金額</li>
+            </ul>
           </div>
 
           <div style="margin-bottom: 15px; padding-left: 10px; border-left: 3px solid var(--primary-color);">
-            <strong style="font-size: 14px; display: block; margin-bottom: 4px;">D.  使用 java 物件特性，設計出你的程式架構並說明你設計的原理</strong>
+            <strong style="font-size: 14px; display: block; margin-bottom: 0;">D.  使用 java 物件特性，設計出你的程式架構並說明你設計的原理</strong>
           </div>
 
           <div style="margin-bottom: 15px; padding-left: 10px; border-left: 3px solid var(--primary-color);">
-            <strong style="font-size: 14px; display: block; margin-bottom: 4px;">E.  請用自己設計的程式輸入實際購買清單並驗證你的CASE</strong>
+            <strong style="font-size: 14px; display: block; margin-bottom: 0;">E.  請用自己設計的程式輸入實際購買清單並驗證你的CASE</strong>
           </div>
         </div>
 
