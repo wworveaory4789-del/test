@@ -1,41 +1,34 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>采盟-人才評測系統 | 綜合測驗</title>
-  
+  <title>采盟-人才評測系統 | 資訊軟體專案 PM</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=PingFang+TC:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght=500;700;900&family=PingFang+TC:wght=400;600;700&family=JetBrains+Mono:wght=400;500&display=swap" rel="stylesheet">
 
   <style>
-/* 針對邏輯測驗圖片的優化 */
-.logic-img {
-    max-width: 350px;     /* 限制最大寬度，您可以依需求調整數值 */
-    width: 100%;          /* 在小螢幕時自動縮放 */
-    height: auto;
-    margin-top: 15px;
-    border-radius: 12px;  /* 圓角化 */
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* 輕微陰影 */
-}
-
     :root {
-      --primary-color: #6a1b9a; 
+      --primary-color: #6a1b9a;
       --accent-color: #00bcd4;
       --danger-color: #ef5350;
       --text-main: #2d3748;
       --text-sub: #718096;
-      --glass-bg: rgba(255, 255, 255, 0.85);
-      --glass-border: rgba(255, 255, 255, 0.5);
+      --glass-bg: rgba(255, 255, 255, 0.78);
+      --glass-border: rgba(255, 255, 255, 0.4);
       --border-radius-main: 18px;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      background: linear-gradient(135deg, #f5fbfb 0%, #ffffff 100%);
-      font-family: 'PingFang TC', sans-serif;
+      background: linear-gradient(135deg, #f0f7f8 0%, #ffffff 100%);
+      font-family: 'PingFang TC', 'Inter', sans-serif;
       margin: 0;
       display: flex;
       color: var(--text-main);
@@ -43,28 +36,61 @@
       overflow: hidden;
     }
 
-    /* 側邊導覽 */
+    /* 左側資訊欄 */
     .sidebar {
-      width: 280px;
+      width: 320px;
       background: var(--glass-bg);
       backdrop-filter: blur(25px);
       padding: 35px 20px;
       border-right: 1px solid var(--glass-border);
       display: flex;
       flex-direction: column;
+      gap: 20px;
       flex-shrink: 0;
     }
 
-    .brand-area h2 { font-family: 'Orbitron'; font-size: 1.3rem; margin: 0; color: var(--primary-color); letter-spacing: 1px; }
-    
-    .nav-list { margin-top: 30px; list-style: none; padding: 0; }
-    .nav-item {
-      padding: 12px 15px; border-radius: 10px; font-size: 14px;
-      margin-bottom: 8px; background: white; border: 1px solid var(--glass-border);
-      color: var(--primary-color); font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    .brand-area h2 {
+      font-family: 'Orbitron';
+      font-size: 1.3rem;
+      margin: 0;
+      letter-spacing: 1px;
+      color: var(--primary-color);
     }
 
-    /* 主內容 */
+    .exam-list {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .exam-item {
+      background: white;
+      padding: 12px 15px;
+      border-radius: 10px;
+      font-size: 13px;
+      border: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: 0.3s;
+      cursor: pointer;
+      color: var(--text-main);
+    }
+
+    .exam-item:hover {
+      background: rgba(106, 27, 154, 0.02);
+    }
+
+    .exam-item.active {
+      border-left: 20px solid var(--primary-color);
+      background: rgba(106, 27, 154, 0.05);
+      font-weight: bold;
+      color: var(--primary-color);
+      border-color: #7f00d4;
+    }
+
+    /* 主內容區 */
     .main-content {
       flex-grow: 1;
       padding: 30px 40px;
@@ -74,112 +100,344 @@
       gap: 25px;
     }
 
-    .section-header {
-      font-size: 1.2rem; color: var(--primary-color); font-weight: 800;
-      border-left: 5px solid var(--accent-color); padding-left: 15px; margin-bottom: 5px;
+    .tab-content {
+      display: none;
+      /* 預設隱藏 */
     }
 
+    .tab-content.active {
+      display: block;
+      /* 啟用的顯示 */
+    }
+
+    .section-title,
+    .section-header {
+      font-family: 'Orbitron', 'PingFang TC', sans-serif;
+      font-size: 1.1rem;
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--accent-color);
+      padding-bottom: 8px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+    }
+
+    .content-box,
     .card {
       background: var(--glass-bg);
       backdrop-filter: blur(15px);
       border-radius: var(--border-radius-main);
-      padding: 30px;
+      padding: 20px;
       border: 1px solid var(--glass-border);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.02);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
       margin-bottom: 20px;
     }
 
-    .q-block { margin-bottom: 25px; }
-    .q-title { font-weight: 800; color: #1a202c; margin-bottom: 10px; display: block; font-size: 16px; }
-    
+    /* 邏輯測驗圖片 */
+    .logic-img {
+      max-width: 350px;
+      width: 100%;
+      height: auto;
+      margin-top: 15px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
     .notice-card {
-      background: rgba(239, 83, 80, 0.05); border: 1px solid rgba(239, 83, 80, 0.2);
-      padding: 20px; border-radius: 12px; margin-bottom: 25px;
+      background: rgba(239, 83, 80, 0.05);
+      border: 1px solid rgba(239, 83, 80, 0.2);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 25px;
     }
-    .notice-item { font-size: 14.5px; color: #b71c1c; font-weight: bold; margin-bottom: 8px; line-height: 1.6; }
 
-    ul, ol { padding-left: 20px; margin: 0; }
-    li { font-size: 15px; margin-bottom: 8px; line-height: 1.7; color: #2d3748; }
-
-    .sub-title { font-weight: bold; color: var(--primary-color); margin-bottom: 8px; display: block; }
-
-    .btn-submit {
-      background: var(--primary-color); color: white; border: none;
-      padding: 18px 40px; border-radius: 50px; cursor: pointer;
-      font-weight: bold; font-family: 'Orbitron'; transition: 0.3s;
-      float: right; margin-top: 20px;
-      box-shadow: 0 4px 15px rgba(106, 27, 154, 0.2);
+    .notice-item {
+      font-size: 14.5px;
+      color: #b71c1c;
+      font-weight: bold;
+      margin-bottom: 8px;
+      line-height: 1.6;
     }
-    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(106, 27, 154, 0.4); }
 
-    @media (max-width: 992px) {
-      body { flex-direction: column; height: auto; overflow: visible; }
-      .sidebar { width: 100%; }
+    table {
+      width: 100%;
+      max-width: 500px;
+      border-collapse: collapse;
+      margin: 15px 0;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #edf2f7;
+    }
+
+    th {
+      background: #f8fafc;
+      padding: 12px;
+      font-size: 13px;
+      text-align: left;
+      color: var(--primary-color);
+      border-bottom: 2px solid #edf2f7;
+    }
+
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #edf2f7;
+      font-size: 13px;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 25px;
+    }
+
+    .info-card-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .info-card {
+      background: white;
+      border-radius: 12px;
+      padding: 12px;
+      border-top: 3px solid var(--primary-color);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    }
+
+    .info-card h4 {
+      margin: 0 0 5px 0;
+      font-size: 10px;
+      color: var(--text-sub);
+      text-transform: uppercase;
+    }
+
+    .info-card p {
+      margin: 0;
+      font-family: 'JetBrains Mono';
+      font-weight: bold;
+      font-size: 13px;
+      color: var(--primary-color);
+    }
+
+    .code-output-box {
+      background: #1e1e1e;
+      border-radius: 12px;
+      padding: 20px;
+      color: #d4d4d4;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      margin: 15px 0;
+    }
+
+    ul,
+    ol {
+      padding-left: 20px;
+    }
+
+    li {
+      font-size: 14px;
+      margin-bottom: 8px;
+      line-height: 1.7;
+    }
+
+    .sub-title {
+      font-weight: bold;
+      color: var(--primary-color);
+      margin-bottom: 8px;
+      display: block;
+      font-size: 15px;
+    }
+
+    .options-group {
+      margin: 10px 0 15px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .option-item {
+      font-size: 14px;
+    }
+
+    .inline-code {
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(0, 0, 0, 0.05);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    .file-link-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .file-link-group a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    .file-link-group a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 1200px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+
+      body {
+        flex-direction: column;
+        height: auto;
+        overflow: visible;
+      }
+
+      .sidebar {
+        width: 100%;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <aside class="sidebar">
     <div class="brand-area">
-      <h2>采盟資訊部</h2>
-      <div style="font-size: 11px; color: var(--accent-color); margin-top: 5px; font-weight: bold;">GENERAL ASSESSMENT</div>
+      <h2>資訊軟體專案 PM</h2>
     </div>
-    <div class="nav-list">
-      <div class="nav-item">考題說明</div>
-      <div class="nav-item">一、邏輯測驗</div>
-      <div class="nav-item">二、業績表</div>
+
+    <div style="margin-top: 20px;">
+      <div style="font-size: 12px; font-weight: bold; color: var(--text-sub); margin-bottom: 10px; font-family: 'Orbitron';">
+        EXAM LIST
+      </div>
+      <div class="exam-list">
+        <div class="exam-item active" onclick="switchTab('general-exam', this)">
+          <span>01.通識測驗</span>
+        </div>
+        <div class="exam-item" onclick="switchTab('sa-exam', this)">
+          <span>02.建制指引分析</span>
+        </div>
+        <div class="exam-item" onclick="switchTab('analyst-exam2', this)">
+          <span>03.采盟庫存管理與系統診斷面試測試題</span>
+        </div>
+      </div>
     </div>
-    <div style="margin-top: auto; padding: 20px; background: white; border-radius: 15px; border: 1px solid var(--glass-border);">
-      <div style="font-size: 12px; color: var(--text-sub);">有問題請撥打分機</div>
-      <div style="font-family: Orbitron; font-size: 22px; font-weight: 900; color: var(--primary-color);">#780</div>
+
+    <div style="margin-top: auto;">
+      <div style="padding: 15px; background: white; border-radius: 10px; border: 1px solid var(--glass-border); margin-bottom: 15px; text-align: center;">
+        <div style="font-size: 11px; color: var(--text-sub);">有問題請撥打分機</div>
+        <div style="font-family: Orbitron; font-size: 20px; font-weight: 900; color: var(--primary-color);">#780</div>
+      </div>
+      <div style="padding: 15px; background: rgba(0,188,212,0.1); border-radius: 10px; text-align: center;">
+        <h5 style="margin:0; font-size: 10px; color: var(--accent-color);">最晚繳卷時間</h5>
+        <div style="font-family: Orbitron; font-size: 22px; font-weight: bold;">17:00</div>
+      </div>
     </div>
   </aside>
 
   <main class="main-content">
-    
-    <!-- 考題注意事項 -->
-    <div class="notice-card">
-      <div class="notice-item">注意：考題請勿拍照外流，考試題目請用 Java 撰寫作答。</div>
-      <div class="notice-item" style="color: var(--text-main); font-weight: normal;">
-        考題說明： 考題已放置電腦桌面上。每一題要開新分頁去作答，頁籤要以題號命名，每一頁要有標題及製表人（放右下方）。
+
+    <div id="general-exam" class="tab-content active">
+      <div class="section-header">一、 邏輯測驗</div>
+      <div class="card">
+        <span class="sub-title">基礎題：</span>
+        <ol>
+          <li>計程車每輛限乘客 4 名，李家 15 人一同外出，應該租幾輛計程車？</li>
+          <li>一個大木箱內有 2 個中木箱，每個中木箱有 4 個小木箱，總共幾個木箱？</li>
+          <li>2 頭牛可換 3 隻豬，6 隻豬可換 8 隻羊，40 隻羊可換幾頭牛？</li>
+          <li>請計算出下圖問題</li>
+          <img src="./img/all.png" alt="邏輯測驗圖" class="logic-img">
+        </ol>
+      </div>
+
+      <div class="section-header">二、 業績表（檔名：考試-excel 業績表）</div>
+      <div class="card">
+        <ul style="list-style-type: square;">
+          <li>明細頁增加 1 欄總金額、總金額 = 數量 × 單價、總金額要有 "$"，3 位 1 撇、右靠。</li>
+          <li>將營報及店號分開、各自為一欄。</li>
+          <li>日期及門市篩選。</li>
+          <li>產出一張店的每日業績。</li>
+          <li>產出一張 Top sales 前 5 名。</li>
+          <li>產出一張每家店賣最好的商品。</li>
+        </ul>
+        <div style="margin-top: 25px;">
+          <span class="sub-title">樞紐分析（檔名：樞紐分析-面試）：</span>
+          <p style="font-size: 14px; padding-left: 20px;">呈現結果如桌面上 [樞紐分析結果]。</p>
+        </div>
       </div>
     </div>
 
-    <!-- 一、 邏輯測驗 -->
-    <div class="section-header">一、 邏輯測驗</div>
-    <div class="card">
-      <span class="sub-title">基礎題：</span>
-      <ol>
-        <li>計程車每輛限乘客 4 名，李家 15 人一同外出，應該租幾輛計程車？</li>
-        <li>一個大木箱內有 2 個中木箱，每個中木箱有 4 個小木箱，總共幾個木箱？</li>
-        <li>2 頭牛可換 3 隻豬，6 隻豬可換 8 隻羊，40 隻羊可換幾頭牛？</li>
-        <li>請計算出下圖問題</li>
-        <img src="./img/all.png" alt="邏輯測驗圖" class="logic-img">
-    </ol>
+    <div id="sa-exam" class="tab-content">
+      <p>請參閱兩份建制指引文件，依照桌面上的答案卷進行問答</p>
+      <div class="file-link-group">
+        <div>
+          <a href="./file/1090618離島署函建置指引_2.3.pdf">離島免稅購物商店業者電腦系統建置指引Ver.2.3</a>
+        </div>
+        <div>
+          <a href="./file/海關-離島2.5.pdf">離島免稅購物商店業者電腦系統建置指引Ver.2.5</a>
+        </div>
+      </div>
     </div>
 
-    <!-- 二、 業績表 -->
-    <div class="section-header">二、 業績表（檔名：考試-excel 業績表）</div>
-    <div class="card">
-      <ul style="list-style-type: square;">
-        <li>明細頁增加 1 欄總金額、總金額 = 數量 × 單價、總金額要有 "$"，3 位 1 撇、右靠。</li>
-        <li>將營報及店號分開、各自為一欄。</li>
-        <li>日期及門市篩選。</li>
-        <li>產出一張店的每日業績。</li>
-        <li>產出一張 Top sales 前 5 名。</li>
-        <li>產出一張每家店賣最好的商品。</li>
-      </ul>
+    <div id="analyst-exam2" class="tab-content">
+      <div class="section-header">采盟庫存管理與系統診斷面試測試題</div>
       
-      <div style="margin-top: 25px;">
-        <span class="sub-title">樞紐分析（檔名：樞紐分析-面試）：</span>
-        <p style="font-size: 15px; padding-left: 20px;">呈現結果如桌面上 [樞紐分析結果]。</p>
-      </div>
-      
+      <div class="card">
+        <span class="sub-title">四、 標準答案 (請照此流程評分)</span>
+        
+        <p style="font-weight: bold; margin-top: 15px; margin-bottom: 5px;">題目一答案要點：</p>
+        <ol>
+          <li>異常意義：代表 IM_ON_HAND 裡殘留了 4 件的「調撥未結量」，但系統內已找不到對應的「簽核中單據」。</li>
+          <li>影響：導致主庫存無法正確歸位，海關看到的帳務會與實體不符。</li>
+        </ol>
 
+        <p style="font-weight: bold; margin-top: 15px; margin-bottom: 5px;">題目二答案要點 (請應徵者務必答出此流程)：</p>
+        <ol>
+          <li>查閱 Excel 報表：翻閱 IT 每日發送的「庫存異常 Excel 報表」，找出該品號第一天出現錯誤的日期。</li>
+          <li>執行 IM0416 (異動紀錄報表)：進入系統執行 IM0416，查詢該品號在出錯當天的異動紀錄，手動計算庫存變動。</li>
+          <li>單據與紀錄比對：將當天的**「調撥單數量」**與 IM_TRANSATION (交易紀錄檔) 進行 1:1 比對。</li>
+          <li>找出原因：確認是「寫入異動檔異常」還是「日結歸位異常」。</li>
+        </ol>
+        
+        <p style="font-size: 14px; background: rgba(0,0,0,0.02); padding: 10px; border-left: 3px solid var(--text-sub); margin-left: 20px;">
+          去查每日發送的庫存異常Excel 報表，看是那一天發出此品號錯誤，之後去查IM0416 表單異動記錄報表，查看品號的異動記錄， 計算庫存異動，再去查看發出excel報表錯誤的那一天去看調撥單的數量跟交易記錄 比對是否有不相符
+        </p>
+
+        <p style="font-weight: bold; margin-top: 15px; margin-bottom: 5px;">題目三答案要點：</p>
+        <ol>
+          <li>根本原因：MIS 修正負庫存時手動改了 STOCK_ON_HAND_QTY (主庫存)，卻忘記清空 MOVE_UNCOMMIT_QTY (未結量)。</li>
+          <li>Double 現象：當下次執行日結或海關上傳時，程序偵測到未結量仍有值，會再次執行 扣帳邏輯，導致同一張單被扣了兩次。</li>
+        </ol>
+      </div>
     </div>
 
   </main>
 
+  <script>
+    function switchTab(tabId, element) {
+      // 1. 隱藏所有內容
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(content => content.classList.remove('active'));
+
+      // 2. 取消所有頁籤的選取狀態
+      const items = document.querySelectorAll('.exam-item');
+      items.forEach(item => item.classList.remove('active'));
+
+      // 3. 顯示點選的內容並標記頁籤
+      document.getElementById(tabId).classList.add('active');
+      element.classList.add('active');
+    }
+  </script>
+
 </body>
+
 </html>

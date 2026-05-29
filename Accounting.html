@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>采盟-人才評測系統 | 資訊帳務處理主管</title>
-  
+  <title>采盟-人才評測系統 | 資訊帳務處理主管/專員</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=PingFang+TC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght=500;700;900&family=PingFang+TC:wght=400;600;700&family=JetBrains+Mono:wght=400;500&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --primary-color: #6a1b9a; 
+      --primary-color: #6a1b9a;
       --accent-color: #00bcd4;
       --danger-color: #ef5350;
       --text-main: #2d3748;
@@ -21,7 +22,10 @@
       --border-radius-main: 18px;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       background: linear-gradient(135deg, #f0f7f8 0%, #ffffff 100%);
       font-family: 'PingFang TC', 'Inter', sans-serif;
@@ -45,8 +49,14 @@
       flex-shrink: 0;
     }
 
-    .brand-area h2 { font-family: 'Orbitron'; font-size: 1.3rem; margin: 0; letter-spacing: 1px; color: var(--primary-color); }
-    
+    .brand-area h2 {
+      font-family: 'Orbitron';
+      font-size: 1.3rem;
+      margin: 0;
+      letter-spacing: 1px;
+      color: var(--primary-color);
+    }
+
     .exam-list {
       margin-top: 10px;
       display: flex;
@@ -67,14 +77,19 @@
       cursor: pointer;
       color: var(--text-main);
     }
-    .exam-item:hover { background: rgba(106, 27, 154, 0.02); }
+
+    .exam-item:hover {
+      background: rgba(106, 27, 154, 0.02);
+    }
+
     .exam-item.active {
       border-left: 20px solid var(--primary-color);
       background: rgba(106, 27, 154, 0.05);
       font-weight: bold;
       color: var(--primary-color);
-      border-color: #7f00d4 ;
+      border-color: #7f00d4;
     }
+
     /* 主內容區 */
     .main-content {
       flex-grow: 1;
@@ -85,88 +100,234 @@
       gap: 25px;
     }
 
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
+    .tab-content {
+      display: none;
+      /* 預設隱藏 */
+    }
 
-    .section-title {
-      font-family: 'PingFang TC', sans-serif;
-      font-size: 1.1rem; color: var(--primary-color);
+    .tab-content.active {
+      display: block;
+      /* 啟用的顯示 */
+    }
+
+    .section-title,
+    .section-header {
+      font-family: 'Orbitron', 'PingFang TC', sans-serif;
+      font-size: 1.1rem;
+      color: var(--primary-color);
       border-bottom: 2px solid var(--accent-color);
       padding-bottom: 8px;
       margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
       font-weight: 800;
     }
 
+    .content-box,
     .card {
       background: var(--glass-bg);
       backdrop-filter: blur(15px);
       border-radius: var(--border-radius-main);
-      padding: 25px;
+      padding: 20px;
       border: 1px solid var(--glass-border);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.02);
-      margin-bottom: 25px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+      margin-bottom: 20px;
     }
 
     /* 邏輯測驗圖片 */
     .logic-img {
-      max-width: 350px; width: 100%; height: auto; margin-top: 15px;
-      border-radius: 12px; border: 1px solid var(--glass-border);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      max-width: 350px;
+      width: 100%;
+      height: auto;
+      margin-top: 15px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     }
 
     .notice-card {
-      background: rgba(239, 83, 80, 0.05); border: 1px solid rgba(239, 83, 80, 0.2);
-      padding: 20px; border-radius: 12px; margin-bottom: 25px;
-    }
-    .notice-item { font-size: 14.5px; color: #b71c1c; font-weight: bold; margin-bottom: 8px; line-height: 1.6; }
-
-    .q-box { margin-bottom: 20px; padding: 15px; background: rgba(255,255,255,0.4); border-radius: 10px; }
-    .q-text { font-weight: bold; margin-bottom: 10px; display: block; line-height: 1.6; }
-    .options { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .options li { font-size: 14px; color: var(--text-main); }
-
-    .data-table {
-      width: 100%; border-collapse: collapse; margin: 10px 0;
-      background: white; border-radius: 8px; overflow: hidden;
-    }
-    .data-table th { background: #f8fafc; padding: 10px; font-size: 12px; text-align: left; color: var(--primary-color); }
-    .data-table td { padding: 8px 10px; border-bottom: 1px solid #edf2f7; font-size: 13px; font-family: 'JetBrains Mono'; }
-
-    /* 作答區線條樣式 */
-    .ans-line {
-      height: 40px;
-      border-bottom: 1px dashed #ccc;
-      margin-bottom: 5px;
+      background: rgba(239, 83, 80, 0.05);
+      border: 1px solid rgba(239, 83, 80, 0.2);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 25px;
     }
 
-    .btn-submit {
-      background: var(--primary-color); color: white; border: none;
-      padding: 18px 40px; border-radius: 50px; cursor: pointer;
-      font-weight: bold; font-family: 'Orbitron'; transition: 0.3s;
-      float: right; margin-top: 20px;
+    .notice-item {
+      font-size: 14.5px;
+      color: #b71c1c;
+      font-weight: bold;
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    table {
+      width: 100%;
+      max-width: 500px;
+      border-collapse: collapse;
+      margin: 15px 0;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #edf2f7;
+    }
+
+    th {
+      background: #f8fafc;
+      padding: 12px;
+      font-size: 13px;
+      text-align: left;
+      color: var(--primary-color);
+      border-bottom: 2px solid #edf2f7;
+    }
+
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #edf2f7;
+      font-size: 13px;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 25px;
+    }
+
+    .info-card-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .info-card {
+      background: white;
+      border-radius: 12px;
+      padding: 12px;
+      border-top: 3px solid var(--primary-color);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    }
+
+    .info-card h4 {
+      margin: 0 0 5px 0;
+      font-size: 10px;
+      color: var(--text-sub);
+      text-transform: uppercase;
+    }
+
+    .info-card p {
+      margin: 0;
+      font-family: 'JetBrains Mono';
+      font-weight: bold;
+      font-size: 13px;
+      color: var(--primary-color);
+    }
+
+    .code-output-box {
+      background: #1e1e1e;
+      border-radius: 12px;
+      padding: 20px;
+      color: #d4d4d4;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      margin: 15px 0;
+    }
+
+    ul,
+    ol {
+      padding-left: 20px;
+    }
+
+    li {
+      font-size: 14px;
+      margin-bottom: 8px;
+      line-height: 1.7;
+    }
+
+    .sub-title {
+      font-weight: bold;
+      color: var(--primary-color);
+      margin-bottom: 8px;
+      display: block;
+      font-size: 15px;
+    }
+
+    .options-group {
+      margin: 10px 0 15px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .option-item {
+      font-size: 14px;
+    }
+
+    .inline-code {
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(0, 0, 0, 0.05);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    .file-link-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .file-link-group a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    .file-link-group a:hover {
+      text-decoration: underline;
     }
 
     @media (max-width: 1200px) {
-      body { flex-direction: column; height: auto; overflow: visible; }
-      .sidebar { width: 100%; min-height: auto; }
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+
+      body {
+        flex-direction: column;
+        height: auto;
+        overflow: visible;
+      }
+
+      .sidebar {
+        width: 100%;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <aside class="sidebar">
     <div class="brand-area">
-      <h2>資訊帳務處理主管</h2>
+      <h2>資訊帳務處理主管/專員</h2>
     </div>
 
     <div style="margin-top: 20px;">
-      <div style="font-size: 12px; font-weight: bold; color: var(--text-sub); margin-bottom: 10px; font-family: 'Orbitron';">EXAM TABS</div>
+      <div style="font-size: 12px; font-weight: bold; color: var(--text-sub); margin-bottom: 10px; font-family: 'Orbitron';">
+        EXAM LIST
+      </div>
       <div class="exam-list">
         <div class="exam-item active" onclick="switchTab('general-exam', this)">
-          <span>01.綜合測驗</span>
+          <span>01.通識測驗</span>
         </div>
-        <div class="exam-item" onclick="switchTab('accounting-exam', this)">
-          <span>02.帳務處理主管考題</span>
+        <div class="exam-item" onclick="switchTab('sa-exam', this)">
+          <span>02.建制指引分析</span>
+        </div>
+        <div class="exam-item" onclick="switchTab('analyst-exam2', this)">
+          <span>03.采盟庫存管理與系統診斷面試測試題</span>
         </div>
       </div>
     </div>
@@ -186,16 +347,10 @@
   <main class="main-content">
 
     <div id="general-exam" class="tab-content active">
-      <div class="notice-card">
-        <div class="notice-item">注意：考題請勿拍照外流，考試題目請用 Java 撰寫作答。</div>
-        <div class="notice-item" style="color: var(--text-main); font-weight: normal;">
-          考題說明：考題已放置電腦桌面上。每一題要開新分頁去作答，頁籤要以題號命名，每一頁要有標題及製表人（放右下方）。
-        </div>
-      </div>
-
-      <div class="section-title">一、 邏輯測驗</div>
+      <div class="section-header">一、 邏輯測驗</div>
       <div class="card">
-        <ol style="padding-left: 20px;">
+        <span class="sub-title">基礎題：</span>
+        <ol>
           <li>計程車每輛限乘客 4 名，李家 15 人一同外出，應該租幾輛計程車？</li>
           <li>一個大木箱內有 2 個中木箱，每個中木箱有 4 個小木箱，總共幾個木箱？</li>
           <li>2 頭牛可換 3 隻豬，6 隻豬可換 8 隻羊，40 隻羊可換幾頭牛？</li>
@@ -204,123 +359,64 @@
         </ol>
       </div>
 
-      <div class="section-title">二、 業績表（檔名：考試-excel 業績表）</div>
+      <div class="section-header">二、 業績表（檔名：考試-excel 業績表）</div>
       <div class="card">
-        <ul style="padding-left: 20px;">
+        <ul style="list-style-type: square;">
           <li>明細頁增加 1 欄總金額、總金額 = 數量 × 單價、總金額要有 "$"，3 位 1 撇、右靠。</li>
           <li>將營報及店號分開、各自為一欄。</li>
           <li>日期及門市篩選。</li>
           <li>產出一張店的每日業績。</li>
           <li>產出一張 Top sales 前 5 名。</li>
           <li>產出一張每家店賣最好的商品。</li>
-          <li>樞紐分析呈現結果如桌面上 [樞紐分析結果]。</li>
         </ul>
+        <div style="margin-top: 25px;">
+          <span class="sub-title">樞紐分析（檔名：樞紐分析-面試）：</span>
+          <p style="font-size: 14px; padding-left: 20px;">呈現結果如桌面上 [樞紐分析結果]。</p>
+        </div>
       </div>
     </div>
 
-    <div id="accounting-exam" class="tab-content">
+    <div id="sa-exam" class="tab-content">
+      <p>請參閱兩份建制指引文件，依照桌面上的答案卷進行問答</p>
+      <div class="file-link-group">
+        <div>
+          <a href="./file/1090618離島署函建置指引_2.3.pdf">離島免稅購物商店業者電腦系統建置指引Ver.2.3</a>
+        </div>
+        <div>
+          <a href="./file/海關-離島2.5.pdf">離島免稅購物商店業者電腦系統建置指引Ver.2.5</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="analyst-exam2" class="tab-content">
+      <div class="section-header">采盟庫存管理與系統診斷面試測試題</div>
       
-      <div class="section-title">一、選擇題（每題 5 分）</div>
       <div class="card">
-        <div class="q-box">
-          <span class="q-text">1. 某門市當日 POS 交易資料如下：<br>
-            現金銷售：40,000 / 信用卡銷售：60,000 / 電子支付：20,000 / 當日退貨：5,000<br>
-            當日有一筆 前一日交易作廢：8,000（該筆交易原始交易日為昨日）<br>
-            請問 今日營業額應為多少？</span>
-          <ul class="options">
-            <li>A. 107,000</li><li>B. 112,000</li><li>C. 115,000</li><li>D. 120,000</li>
-          </ul>
-        </div>
-        <div class="q-box">
-          <span class="q-text">2. 若 POS 系統與 ERP 系統帳務資料出現差異，下列何者最可能為原因？</span>
-          <ul class="options">
-            <li>A. 使用者權限設定錯誤</li><li>B. 系統時間不同</li><li>C. 交易資料未成功傳送至 ERP</li><li>D. 網路速度較慢</li>
-          </ul>
-        </div>
-        <div class="q-box">
-          <span class="q-text">3. 在資訊帳務系統中，下列哪一項資料最常用於進行對帳？</span>
-          <ul class="options">
-            <li>A. 使用者登入紀錄</li><li>B. 交易明細資料</li><li>C. 系統錯誤訊息</li><li>D. 權限設定紀錄</li>
-          </ul>
-        </div>
-        <div class="q-box">
-          <span class="q-text">4. 若每日交易資料透過 Batch Job 匯入 ERP，若當日資料未入帳，首先應檢查：</span>
-          <ul class="options">
-            <li>A. 系統主機型號</li><li>B. Batch Job 執行紀錄（Log）</li><li>C. 使用者帳號權限</li><li>D. 作業系統版本</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="section-title">二、簡答題（每題 10 分）</div>
-      <div class="card">
-        <p><strong>5. 請簡述 POS 系統交易資料傳入 ERP 或財務系統的一般流程。</strong></p>
-        <p style="color: var(--text-sub); font-size: 14px;">（請列出主要步驟或系統流程）</p>
-        <div class="ans-line"></div>
-        <div class="ans-line"></div>
+        <span class="sub-title">四、 標準答案 (請照此流程評分)</span>
         
-        <p style="margin-top: 20px;"><strong>6. 在資訊帳務系統中，每日對帳時通常需要比對哪些資料？</strong></p>
-        <p style="color: var(--text-sub); font-size: 14px;">（請列出至少三項）</p>
-        <div class="ans-line"></div>
-        <div class="ans-line"></div>
-      </div>
+        <p style="font-weight: bold; margin-top: 15px; margin-bottom: 5px;">題目一答案要點：</p>
+        <ol>
+          <li>異常意義：代表 IM_ON_HAND 裡殘留了 4 件的「調撥未結量」，但系統內已找不到對應的「簽核中單據」。</li>
+          <li>影響：導致主庫存無法正確歸位，海關看到的帳務會與實體不符。</li>
+        </ol>
 
-      <div class="section-title">三、邏輯題（每題 15 分）</div>
-      <div class="card">
-        <p><strong>7. 情境題：某門市反映 POS 顯示今日銷售為 250,000，但 ERP 財務系統顯示為 230,000。</strong></p>
-        <p>(1) 你會如何排查問題？</p>
-        <div class="ans-line"></div>
-        <p>(2) 請列出至少三個可能原因：</p>
-        <div class="ans-line"></div>
-        <div class="ans-line"></div>
-      </div>
-
-      <div class="section-title">四、資訊能力題（15 分）</div>
-      <div class="card">
-        <p><strong>8. 假設系統有一張交易資料表：</strong></p>
-        <table class="data-table">
-          <thead><tr><th>transaction_id</th><th>store_id</th><th>amount</th><th>payment_type</th><th>date</th></tr></thead>
-         
-        </table>
-        <p><strong>(1) 若要查詢「今日各支付方式的總交易金額」，應如何進行資料統計？</strong></p>
-        <p style="color: var(--text-sub); font-size: 13px;">（可使用 SQL 或文字說明）</p>
-        <div class="ans-line"></div>
-        <div class="ans-line"></div>
-      </div>
-
-      <div class="section-title">五、情境申論題（20 分）</div>
-      <div class="card">
-        <p><strong>9. 情境題</strong></p>
-        <p style="font-size: 14px; line-height: 1.8;">
-          資訊帳務系統每日需進行：<br>
-          • 門市交易資料匯入<br>
-          • ERP帳務入帳<br>
-          • 財務對帳<br>
-          某日發現大量門市交易資料 <strong>未成功匯入 ERP 系統</strong>。
+        <p style="font-weight: bold; margin-top: 15px; margin-bottom: 5px;">題目二答案要點 (請應徵者務必答出此流程)：</p>
+        <ol>
+          <li>查閱 Excel 報表：翻閱 IT 每日發送的「庫存異常 Excel 報表」，找出該品號第一天出現錯誤的日期。</li>
+          <li>執行 IM0416 (異動紀錄報表)：進入系統執行 IM0416，查詢該品號在出錯當天的異動紀錄，手動計算庫存變動。</li>
+          <li>單據與紀錄比對：將當天的**「調撥單數量」**與 IM_TRANSATION (交易紀錄檔) 進行 1:1 比對。</li>
+          <li>找出原因：確認是「寫入異動檔異常」還是「日結歸位異常」。</li>
+        </ol>
+        
+        <p style="font-size: 14px; background: rgba(0,0,0,0.02); padding: 10px; border-left: 3px solid var(--text-sub); margin-left: 20px;">
+          去查每日發送的庫存異常Excel 報表，看是那一天發出此品號錯誤，之後去查IM0416 表單異動記錄報表，查看品號的異動記錄， 計算庫存異動，再去查看發出excel報表錯誤的那一天去看調撥單的數量跟交易記錄 比對是否有不相符
         </p>
-        <p style="margin-top: 15px;"><strong>請說明：你會如何處理此事件？</strong></p>
-        <div class="ans-line"></div>
-        <div class="ans-line"></div>
-        <div class="ans-line"></div>
-        
-        <p style="margin-top: 20px;"><strong>未來應如何改善或避免再次發生？</strong></p>
-        <div class="ans-line"></div>
-        <div class="ans-line"></div>
-      </div>
 
-      <div class="section-title">六、管理與流程題（20 分）</div>
-      <div class="card">
-        <p><strong>10. 若你負責管理資訊帳務處理團隊，請說明你會如何：</strong></p>
-        <p style="margin-top: 15px;"><strong>(1) 建立帳務處理 SOP</strong></p>
-        <div class="ans-line"></div>
-        
-        <p style="margin-top: 15px;"><strong>(2) 降低帳務錯誤率</strong></p>
-        <div class="ans-line"></div>
-        
-        <p style="margin-top: 15px;"><strong>(3) 建立系統監控或預警機制</strong></p>
-        <div class="ans-line"></div>
-        <div class="ans-line"></div>
-        
-        <button class="btn-submit">提交評測</button>
+        <p style="font-weight: bold; margin-top: 15px; margin-bottom: 5px;">題目三答案要點：</p>
+        <ol>
+          <li>根本原因：MIS 修正負庫存時手動改了 STOCK_ON_HAND_QTY (主庫存)，卻忘記清空 MOVE_UNCOMMIT_QTY (未結量)。</li>
+          <li>Double 現象：當下次執行日結或海關上傳時，程序偵測到未結量仍有值，會再次執行 扣帳邏輯，導致同一張單被扣了兩次。</li>
+        </ol>
       </div>
     </div>
 
@@ -328,12 +424,20 @@
 
   <script>
     function switchTab(tabId, element) {
-      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-      document.querySelectorAll('.exam-item').forEach(i => i.classList.remove('active'));
+      // 1. 隱藏所有內容
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(content => content.classList.remove('active'));
+
+      // 2. 取消所有頁籤的選取狀態
+      const items = document.querySelectorAll('.exam-item');
+      items.forEach(item => item.classList.remove('active'));
+
+      // 3. 顯示點選的內容並標記頁籤
       document.getElementById(tabId).classList.add('active');
       element.classList.add('active');
     }
   </script>
 
 </body>
+
 </html>
