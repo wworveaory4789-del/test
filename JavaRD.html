@@ -178,24 +178,26 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 10px 0;
+      margin: 15px 0;
       background: white;
       border-radius: 10px;
       overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
     th {
       background: #f8fafc;
-      padding: 10px;
-      font-size: 13px;
+      padding: 12px 15px;
+      font-size: 14px;
       text-align: left;
       color: var(--primary-color);
+      border-bottom: 2px solid #edf2f7;
     }
 
     td {
-      padding: 8px 10px;
+      padding: 12px 15px;
       border-bottom: 1px solid #edf2f7;
-      font-size: 13px;
+      font-size: 14px;
     }
 
     .grid-container {
@@ -348,37 +350,58 @@
     </div>
 
     <div id="java-exam" class="tab-content">
-      <div class="section-title">01. 考試目的</div>
-      <div class="content-box">
-        <p style="margin:0; line-height: 1.6; font-size: 14px;">
-          本測驗旨在評估考生對於程式設計邏輯、物件導向結構化設計能力、以及可維護性與輸出格式清晰度之掌握。
+      <div class="section-header">登入資訊</div>
+      <div class="info-card-group">
+        <div class="info-card">
+          <h4>登入密碼</h4>
+          <p>login@12371287</p>
+        </div>
+        <div class="info-card">
+          <h4>遠端密碼</h4>
+          <p>P@ssw0rd</p>
+        </div>
+      </div>
+
+      <div class="section-header">1. 考試目的</div>
+      <div class="card">
+        <p style="font-size: 14px; margin: 0; line-height: 1.7;">
+          本測驗旨在評估考生對於程式設計邏輯、物件導向結構化設計能力、以及程式可維護性與輸出格式清晰度之掌握。
         </p>
       </div>
 
-      <div class="section-title">02. 題目說明</div>
-      <div class="content-box">
-        <div class="info-card-group">
-          <div class="info-card">
-            <h4>登入密碼</h4>
-            <p>login@12371287</p>
-          </div>
-          <div class="info-card">
-            <h4>連線密碼</h4>
-            <p>P@ssw0rd</p>
-          </div>
-        </div>
-        <p style="margin-bottom: 15px; font-size: 14px; line-height: 1.6;">
-          請以 Java 撰寫一套簡易 POS（銷售系統）計算邏輯，依據題目要求計算各商品小計、會員折扣、小計後滿額折抵與最終應收金額，並以格式化輸出顯示結果。
+      <div class="section-header">2. 題目說明</div>
+      <div class="card">
+        <p style="font-size: 14px; line-height: 1.7;">
+          請以 Java 撰寫一套簡易 POS（銷售系統）計算邏輯，依據商品主檔與購物車內容，計算各商品小計、會員折扣、滿額折抵與最終應收金額，並以格式化輸出顯示結果。
         </p>
-        <div style="font-size: 13px; color: var(--primary-color); font-weight: bold;">評核重點：</div>
-        <ul style="font-size: 13px; line-height: 1.8; color: var(--text-sub); margin: 5px 0 15px 0;">
-          <li>程式邏輯：小計前折扣、滿額後折抵邏輯順序正確。</li>
-          <li>程式架構：有良好結構化（例如用 class 封裝商品）。</li>
-          <li>可維護性：折扣規則易於修改（非寫死在多處）。</li>
-          <li>輸出清晰度：輸出明確、格式對齊、易於閱讀。</li>
+        
+        <span class="sub-title" style="margin-top: 15px;">評核重點：</span>
+        <ul>
+          <li><strong>程式邏輯：</strong> 小計前折扣、滿額後折抵之邏輯順序正確，小數點處理正確。</li>
+          <li><strong>程式架構：</strong> 
+            <ul>
+              <li><strong>Entity（資料實體）：</strong> 須定義明確的物件模型（POJO）來封裝資料（如Product、Cart 等），Entity 內不應包含核心商業計算邏輯。</li>
+              <li><strong>Service（業務邏輯層）：</strong> 須將「結帳與折扣計算邏輯」獨立封裝至服務類別中（如：CheckoutService），而非寫在 Main 方法內。</li>
+            </ul>
+          </li>
+          <li><strong>可維護性：</strong> 折扣規則（如 95 折、滿千送百）易於修改，非寫死（Hardcoded）在多處。</li>
+          <li><strong>輸出清晰度：</strong> 輸出明確、格式對齊、易於閱讀。</li>
         </ul>
 
-        <div style="font-size: 13px; color: var(--primary-color); font-weight: bold;">商品主檔列表：</div>
+        <div style="margin-top: 20px; padding: 15px; background: rgba(106, 27, 154, 0.03); border-radius: 10px; border-left: 4px solid var(--primary-color);">
+          <span class="sub-title">進階加分項（選作）：</span>
+          <ul>
+            <li><strong>Map 資料結構設計（加分關鍵）：</strong>
+              <ul>
+                <li><strong>商品主檔：</strong> 能將「商品主檔列表」設計為 HashMap&lt;String, Product&gt; 結構（以品號為 Key），模擬高效能的記憶體快取或資料庫查詢。</li>
+                <li><strong>購物車與排序：</strong> 購物車或輸出明細能運用 TreeMap 結構，利用 Comparator 特性，達到讓輸出的明細自動依據「品號」或用「品名」依序排序（A001 -&gt; B002 -&gt; C002）的效果。</li>
+                <li><strong>資料分離：</strong> 模擬結帳時，Service 僅接收「品號」與「數量」作為輸入，並透過 Map 結構動態對照（Look up）商品品名與單價，而非將品名/單價手動硬編碼於購物車中。</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <span class="sub-title" style="margin-top: 25px;">商品主檔列表 (Master Data)：</span>
         <table>
           <thead>
             <tr>
@@ -391,13 +414,13 @@
           <tbody>
             <tr>
               <td>A001</td>
-              <td>酒類</td>
+              <td>葡萄酒</td>
               <td>900</td>
               <td>1</td>
             </tr>
             <tr>
               <td>A002</td>
-              <td>酒類</td>
+              <td>威士忌</td>
               <td>1200</td>
               <td>1</td>
             </tr>
@@ -409,8 +432,8 @@
             </tr>
             <tr>
               <td>B002</td>
-              <td>台產</td>
-              <td>350</td>
+              <td>鳳黃酥</td>
+              <td>450</td>
               <td>1</td>
             </tr>
             <tr>
@@ -429,44 +452,61 @@
         </table>
       </div>
 
-      <div class="grid-container">
-        <div>
-          <div class="section-title">03. 計算規則</div>
-          <div class="content-box">
-            <ul style="font-size: 13px; line-height: 2; padding-left: 20px; margin: 0;">
-              <li><strong>基本銷售計算：</strong>每筆交易包含多筆商品資料。計算每項商品小計（單價 × 數量），再加總為銷售金額。</li>
-              <li><strong>會員折扣（小計前活動）：</strong>若顧客為會員，享有 <span style="color: var(--danger-color); font-weight: bold;">95
-                  折</span>（商品單價 × 0.95 再計入小計）。</li>
-              <li><strong>滿額折抵（小計後活動）：</strong>
-                <br>• 若總金額達到 1000 元，折抵 100 元。
-                <br>• 若總金額達到 2000 元，折抵 200 元。
-                <br>• 依照等比例級距，依此類推。若未達門檻，無折抵。
-              </li>
-            </ul>
-          </div>
-        </div>
+      <div class="section-header">3. 計算規則</div>
+      <div class="card">
+        <ul>
+          <li><strong>基本銷售計算：</strong> 每筆交易包含多筆商品與數量。計算每項商品小計（單價 Ｘ 數量），再加總為總金額。</li>
+          <li><strong>會員折扣（小計前活動）：</strong> 若顧客身份為會員，享有 95 折優惠（商品單價 × 0.95 後再計算該品項小計）。金額若產生小數點，請以四捨五入取至整數。</li>
+          <li><strong>滿額折抵（小計後活動）：</strong> 消費總金額每滿 1000 元，現折 100 元（可累贈，例如滿 2000 元折 200 元，滿 5000 元折 500 元；未達門檻則無折抵）。</li>
+        </ul>
+      </div>
 
-        <div class="right-sidebar">
-          <div class="section-title">04. 輸出要求</div>
-          <div class="code-output-box">
-            <div style="color: #6a9955; margin-bottom: 8px;">//請輸出以下購買商品明細之 JAVA 程式碼結果：</div>
-            <div style="font-size: 11px;">
-              A001 酒類 (900) x 2<br>
-              B002 台產 (350) x 10<br>
-              C003 巧克力 (120) x 3
-            </div>
-            <div style="margin-top: 12px; border-top: 1px solid #444; padding-top: 8px; color: #ce9178;">
-              需包含：<br>
-              • 會員折扣後金額<br>
-              • 滿額折抵金額<br>
-              • 最終應收金額
-            </div>
-          </div>
-        </div>
+      <div class="section-header">4. 輸出要求</div>
+      <div class="card">
+        <p style="font-size: 14px; line-height: 1.7;">
+          請在程式中模擬以下購物車內容，並分別輸出「一般顧客」與「會員」兩種身份的格式化結帳明細：
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>品號</th>
+              <th>品名</th>
+              <th>單價</th>
+              <th>數量</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>A001</td>
+              <td>葡萄酒</td>
+              <td>900</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>B002</td>
+              <td>鳳黃酥</td>
+              <td>450</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td>C002</td>
+              <td>巧克力</td>
+              <td>120</td>
+              <td>3</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <span class="sub-title" style="margin-top: 20px;">輸出內容需包含：</span>
+        <ul>
+          <li>商品明細（品號、品名、單價、數量、小計）</li>
+          <li>活動折扣前總金額</li>
+          <li>滿額折抵金額</li>
+          <li>最終應收金額</li>
+        </ul>
       </div>
     </div>
-
-  
   </main>
 
   <script>
